@@ -15,4 +15,5 @@ const (
 	RedisKeyFriendRelationCache           = "FRIEND_RELATION_CACHE:"
 	RedisKeyBlackListCache                = "BLACK_LIST_CACHE:"
 	RedisKeyGroupCache                    = "GROUP_CACHE:"
+	RedisKeyToken                         = "TOKEN:"
 )

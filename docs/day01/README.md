@@ -1,24 +1,34 @@
 # 1、克隆Zero-IM-Server
+
 ```shell
 git clone https://github.com/showurl/Zero-IM-Server.git -b main --depth 1
 ```
 
 # 2、搜索 todo
+
 ## 2.1 im-user-rpc中 的 todo
+
 ### getGroupMemberIDListFromCacheLogic.go
+
 > 从缓存取群成员列表
+
 ```go
 // getGroupMemberIDListFromCacheLogic.go
 func (l *GetGroupMemberIDListFromCacheLogic) GetGroupMemberIDListFromCache(in *pb.GetGroupMemberIDListFromCacheReq) (*pb.GetGroupMemberIDListFromCacheResp, error) {
-    // 如果你使用 Open-IM 的群聊功能 此处需要你实现
-    // 如果你仅仅使用 Zero-IM 的超级大群功能 你需要实现 GetUserListFromSuperGroupWithOpt rpc接口
-    // [🐶]我就不实现了 我准备用自己写的超级大群功能
+// 如果你使用 Open-IM 的群聊功能 此处需要你实现
+// 如果你仅仅使用 Zero-IM 的超级大群功能 你需要实现 GetUserListFromSuperGroupWithOpt rpc接口
+// [🐶]我就不实现了 我准备用自己写的超级大群功能
 }
 ```
+
 ### getSingleConversationRecvMsgOptsLogic.go
+
 > 获取单聊会话的消息接收选项
+
 #### 先把仓库加进来
+
 ##### 新增package repository
+
 ```go
 // rep.go
 package repository
@@ -58,20 +68,22 @@ func NewRep(svcCtx *svc.ServiceContext) *Rep {
 ```
 
 ##### 新增 redis mongodb config
+
 ```go
 // config/config.go
 type Config struct {
-    zrpc.RpcServerConf
-    RedisConfig RedisConfig
-    MysqlConfig global.MysqlConfig
+zrpc.RpcServerConf
+RedisConfig RedisConfig
+MysqlConfig global.MysqlConfig
 }
 type RedisConfig struct {
-    redis.RedisConf
-    DB int
+redis.RedisConf
+DB int
 }
 ```
 
 ##### etc imuser.yaml新增配置
+
 ```yaml
 RedisConfig:
   Host: 192.168.2.77:6379
@@ -89,23 +101,24 @@ MysqlConfig:
 ```go
 // getSingleConversationRecvMsgOptsLogic.go
 type GetSingleConversationRecvMsgOptsLogic struct {
-    ctx    context.Context
-    svcCtx *svc.ServiceContext
-    logx.Logger
-    rep *repository.Rep
+ctx    context.Context
+svcCtx *svc.ServiceContext
+logx.Logger
+rep *repository.Rep
 }
 
 func NewGetSingleConversationRecvMsgOptsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSingleConversationRecvMsgOptsLogic {
-    return &GetSingleConversationRecvMsgOptsLogic{
-        ctx:    ctx,
-        svcCtx: svcCtx,
-        Logger: logx.WithContext(ctx),
-        rep:    repository.NewRep(svcCtx),
-    }
+return &GetSingleConversationRecvMsgOptsLogic{
+ctx:    ctx,
+svcCtx: svcCtx,
+Logger: logx.WithContext(ctx),
+rep:    repository.NewRep(svcCtx),
+}
 }
 ```
 
 #### model
+
 ```go
 // model/single_conversation_record.go
 package model
@@ -129,6 +142,7 @@ func (s *SingleConversationRecord) TableName() string {
 ```
 
 #### logic
+
 ```go
 package logic
 
@@ -163,6 +177,7 @@ func (l *GetSingleConversationRecvMsgOptsLogic) GetSingleConversationRecvMsgOpts
 ```
 
 #### 单元测试
+
 ```go
 package rpc
 
@@ -202,8 +217,11 @@ func TestGetSingleConversationRecvMsgOptsLogic(t *testing.T) {
 ```
 
 ### getUserListFromSuperGroupWithOptLogic.go
+
 > 使用接收消息选项获取群聊中的用户列表
+
 #### model
+
 ```go
 package model
 
@@ -222,11 +240,15 @@ func (s *SuperGroupConversationRecord) TableName() string {
 	return "supergroup_conversation_record_" + s.GroupId
 }
 ```
+
 #### repository.go
+
 ```go
 rep.RelationCache = rc.NewRelationMapping(rep.Mysql, rep.Cache)
 ```
+
 #### getUserListFromSuperGroupWithOptLogic.go
+
 ```go
 package logic
 
@@ -303,6 +325,7 @@ func (l *GetUserListFromSuperGroupWithOptLogic) GetUserListFromSuperGroupWithOpt
 ```
 
 #### 单元测试
+
 ```go
 package rpc
 
@@ -333,8 +356,11 @@ func TestGetUserListFromSuperGroupWithOpt(t *testing.T) {
 ```
 
 ### ifAInBBlacklistLogic.go
+
 > 判断A是否在B的黑名单中
+
 #### model
+
 ```go
 package model
 
@@ -350,9 +376,12 @@ func (b *Blacklist) TableName() string {
 }
 
 ```
+
 #### logic
+
 ```go
 package logic
+
 //  判断用户A是否在B黑名单中
 func (l *IfAInBBlacklistLogic) IfAInBBlacklist(in *pb.IfAInBBlacklistReq) (*pb.IfAInBBlacklistResp, error) {
 	blacklist := &model.Blacklist{}
@@ -376,6 +405,7 @@ func (l *IfAInBBlacklistLogic) IfAInBBlacklist(in *pb.IfAInBBlacklistReq) (*pb.I
 ```
 
 #### 单元测试
+
 ```go
 package rpc
 
@@ -399,3 +429,113 @@ func TestIfAInBBlacklist(t *testing.T) {
 	t.Log(resp)
 }
 ```
+
+### ifAInBFriendListLogic.go 和 ifAInBBlacklistLogic.go 差不多 复制粘贴改改即可
+
+### verifyTokenLogic.go
+> 验证token
+
+#### token 组成部分 允许同平台单账号同时登录
+- redis key：`userId` + `platform`
+- redis hash key：`token`
+- redis hash value：`int(暂时无意义)`
+
+#### repository
+```go
+package repository
+
+import (
+	"context"
+	"github.com/showurl/Zero-IM-Server/common/types"
+	timeUtils "github.com/showurl/Zero-IM-Server/common/utils/time"
+	"strconv"
+	"time"
+)
+
+func (r *Rep) GetTokenMap(ctx context.Context, uid string, platform string) (map[string]int, error) {
+	key := types.RedisKeyToken + uid + ":" + platform
+	result, err := r.Cache.HGetAll(ctx, key).Result()
+	if err != nil {
+		return map[string]int{}, err
+	}
+	tokenMap := make(map[string]int)
+	for k, v := range result {
+		tokenMap[k], _ = strconv.Atoi(v)
+	}
+	return tokenMap, nil
+}
+
+func (r *Rep) RenewalToken(ctx context.Context, uid string, platform string) error {
+	key := types.RedisKeyToken + uid + ":" + platform
+	return r.Cache.ExpireAt(ctx, key, timeUtils.Now().Add(time.Hour*24*time.Duration(r.svcCtx.Config.TokenRenewalDay))).Err()
+}
+
+```
+
+#### logic
+```go
+package logic
+
+import (
+	"context"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	jwtUtils "github.com/showurl/Zero-IM-Server/common/utils/jwt"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+type VerifyTokenLogic struct {
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+	logx.Logger
+	rep *repository.Rep
+}
+
+func NewVerifyTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *VerifyTokenLogic {
+	return &VerifyTokenLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
+		rep:    repository.NewRep(svcCtx),
+	}
+}
+
+// 检查token
+func (l *VerifyTokenLogic) VerifyToken(in *pb.VerifyTokenReq) (*pb.VerifyTokenResp, error) {
+	claim, err := jwtUtils.GetClaimFromToken(in.Token, l.svcCtx.Config.TokenSecret)
+	if err != nil {
+		return nil, err
+	}
+	tokenMap, err := l.rep.GetTokenMap(l.ctx, claim.UID, claim.Platform)
+	if err != nil {
+		return nil, err
+	}
+	if _, ok := tokenMap[in.Token]; ok {
+		// 有的话就更新过期时间
+		go func() {
+			_ = l.rep.RenewalToken(l.ctx, claim.UID, claim.Platform)
+		}()
+		return &pb.VerifyTokenResp{
+			Uid:     claim.UID,
+			Success: true,
+			ErrMsg:  "",
+		}, nil
+	} else {
+		// 没有 token 提示
+		return &pb.VerifyTokenResp{
+			Uid:     "",
+			Success: false,
+			ErrMsg:  "token is not exist",
+		}, nil
+	}
+}
+
+```
+
+## 2.2 msg-callback 中的 todo 
+> 消息发送前后的回调 
+> before sendmsg 可以返回错误信息 使msg发送失败
+> after sendmsg 可以记录消息内容 达到双写的目的
+> before send text msg 可以过滤消息文本 进行违禁词替换
