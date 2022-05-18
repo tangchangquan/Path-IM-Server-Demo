@@ -536,6 +536,9 @@ func (l *VerifyTokenLogic) VerifyToken(in *pb.VerifyTokenReq) (*pb.VerifyTokenRe
 
 ## 2.2 msg-callback 中的 todo 
 > 消息发送前后的回调 
+
 > before sendmsg 可以返回错误信息 使msg发送失败
+
 > after sendmsg 可以记录消息内容 达到双写的目的
+
 > before send text msg 可以过滤消息文本 进行违禁词替换
