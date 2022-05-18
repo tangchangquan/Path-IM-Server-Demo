@@ -331,3 +331,71 @@ func TestGetUserListFromSuperGroupWithOpt(t *testing.T) {
 }
 
 ```
+
+### ifAInBBlacklistLogic.go
+> 判断A是否在B的黑名单中
+#### model
+```go
+package model
+
+type Blacklist struct {
+	UserId string `gorm:"column:user_id;primary_key;type:char(64);comment:主键 用户id;"`
+	SelfId string `gorm:"column:self_id;type:char(64);comment:自己id,分表键;"`
+	// 拉黑时间
+	CreatedAt int64 `gorm:"column:created_at;type:bigint(10);comment:拉黑时间 秒级时间戳;"`
+}
+
+func (b *Blacklist) TableName() string {
+	return "blacklist_" + b.SelfId
+}
+
+```
+#### logic
+```go
+package logic
+//  判断用户A是否在B黑名单中
+func (l *IfAInBBlacklistLogic) IfAInBBlacklist(in *pb.IfAInBBlacklistReq) (*pb.IfAInBBlacklistResp, error) {
+	blacklist := &model.Blacklist{}
+	blacklist.SelfId = in.BUserID
+	exist, err := l.rep.RelationCache.Exist(in.AUserID, blacklist, "user_id", map[string]interface{}{})
+	if err != nil {
+		if xormerr.TableNotFound(err) {
+			_ = l.rep.Mysql.Table(blacklist.TableName()).AutoMigrate(blacklist)
+		}
+		return nil, err
+	}
+	return &pb.IfAInBBlacklistResp{
+		CommonResp: &pb.CommonResp{
+			ErrCode: 0,
+			ErrMsg:  "",
+		},
+		IsInBlacklist: exist,
+	}, nil
+}
+
+```
+
+#### 单元测试
+```go
+package rpc
+
+import (
+	"context"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	"testing"
+)
+
+func TestIfAInBBlacklist(t *testing.T) {
+	resp, err := imUserService.IfAInBBlacklist(
+		context.Background(),
+		&pb.IfAInBBlacklistReq{
+			AUserID: "a",
+			BUserID: "b",
+		},
+	)
+	if err != nil {
+		t.Error(err)
+	}
+	t.Log(resp)
+}
+```
