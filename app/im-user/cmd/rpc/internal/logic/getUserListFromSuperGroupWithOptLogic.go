@@ -2,6 +2,11 @@ package logic
 
 import (
 	"context"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
+	"github.com/showurl/Zero-IM-Server/app/im-user/model"
+	"github.com/showurl/Zero-IM-Server/common/xcache/global"
+	"github.com/showurl/Zero-IM-Server/common/xcache/rc"
+	xormerr "github.com/showurl/Zero-IM-Server/common/xorm/err"
 
 	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
 	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
@@ -13,6 +18,7 @@ type GetUserListFromSuperGroupWithOptLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
+	rep *repository.Rep
 }
 
 func NewGetUserListFromSuperGroupWithOptLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserListFromSuperGroupWithOptLogic {
@@ -20,48 +26,46 @@ func NewGetUserListFromSuperGroupWithOptLogic(ctx context.Context, svcCtx *svc.S
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
+		rep:    repository.NewRep(svcCtx),
 	}
 }
 
 //  获取超级群成员列表 通过消息接收选项
 func (l *GetUserListFromSuperGroupWithOptLogic) GetUserListFromSuperGroupWithOpt(in *pb.GetUserListFromSuperGroupWithOptReq) (*pb.GetUserListFromSuperGroupWithOptResp, error) {
-	// todo: add your logic here and delete this line
-
-	return &pb.GetUserListFromSuperGroupWithOptResp{
-		CommonResp: &pb.CommonResp{
-			ErrCode: 0,
-			ErrMsg:  "",
-		},
-		UserIDOptList: []*pb.UserIDOpt{{
-			UserID: "1",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "2",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "3",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "4",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "5",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "6",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "7",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "8",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "9",
-			Opts:   in.Opts[0],
-		}, {
-			UserID: "10",
-			Opts:   in.Opts[0],
-		}},
-	}, nil
+	resp := &pb.GetUserListFromSuperGroupWithOptResp{
+		CommonResp:    &pb.CommonResp{},
+		UserIDOptList: nil,
+	}
+	record := &model.SuperGroupConversationRecord{}
+	record.GroupId = in.SuperGroupID
+	for _, opt := range in.Opts {
+		var userIds []string
+		err := l.rep.RelationCache.List(
+			&userIds,
+			0,
+			-1,
+			record,
+			"user_id",
+			map[string]interface{}{
+				"recv_msg_opt": opt,
+			},
+			rc.Order("user_id"),
+		)
+		if err != nil {
+			if xormerr.TableNotFound(err) {
+				l.rep.Mysql.Table(record.TableName()).AutoMigrate(record)
+			}
+			if global.RedisErrorNotExists == err {
+				continue
+			}
+			return nil, err
+		}
+		for _, id := range userIds {
+			resp.UserIDOptList = append(resp.UserIDOptList, &pb.UserIDOpt{
+				UserID: id,
+				Opts:   opt,
+			})
+		}
+	}
+	return resp, nil
 }

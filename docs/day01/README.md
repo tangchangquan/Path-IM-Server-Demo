@@ -200,3 +200,104 @@ func TestGetSingleConversationRecvMsgOptsLogic(t *testing.T) {
 }
 
 ```
+
+### getUserListFromSuperGroupWithOptLogic.go
+> 使用接收消息选项获取群聊中的用户列表
+#### model
+```go
+package model
+
+type SuperGroupConversationRecord struct {
+	UserId     string `gorm:"column:user_id;primary_key;type:char(64);comment:主键 用户id;"`
+	GroupId    string `gorm:"column:group_id;type:char(64);comment:群组id;"`
+	RecvMsgOpt int8   `gorm:"column:recv_msg_opt;index;type:tinyint(1);comment:接收消息选项，0接收并提醒 1屏蔽消息 2接收但不提醒 默认0;default:0;"`
+	Remark     string `gorm:"column:remark;type:varchar(255);comment:备注;default:'';"`
+}
+
+func (s *SuperGroupConversationRecord) GetIdString() string {
+	return s.UserId
+}
+
+func (s *SuperGroupConversationRecord) TableName() string {
+	return "supergroup_conversation_record_" + s.GroupId
+}
+```
+#### repository.go
+```go
+rep.RelationCache = rc.NewRelationMapping(rep.Mysql, rep.Cache)
+```
+#### getUserListFromSuperGroupWithOptLogic.go
+```go
+package logic
+
+import (
+	"context"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
+	"github.com/showurl/Zero-IM-Server/app/im-user/model"
+	"github.com/showurl/Zero-IM-Server/common/xcache/global"
+	"github.com/showurl/Zero-IM-Server/common/xcache/rc"
+	xormerr "github.com/showurl/Zero-IM-Server/common/xorm/err"
+
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+type GetUserListFromSuperGroupWithOptLogic struct {
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+	logx.Logger
+	rep *repository.Rep
+}
+
+func NewGetUserListFromSuperGroupWithOptLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserListFromSuperGroupWithOptLogic {
+	return &GetUserListFromSuperGroupWithOptLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
+		rep:    repository.NewRep(svcCtx),
+	}
+}
+
+//  获取超级群成员列表 通过消息接收选项
+func (l *GetUserListFromSuperGroupWithOptLogic) GetUserListFromSuperGroupWithOpt(in *pb.GetUserListFromSuperGroupWithOptReq) (*pb.GetUserListFromSuperGroupWithOptResp, error) {
+	resp := &pb.GetUserListFromSuperGroupWithOptResp{
+		CommonResp:    &pb.CommonResp{},
+		UserIDOptList: nil,
+	}
+	record := &model.SuperGroupConversationRecord{}
+	record.GroupId = in.SuperGroupID
+	for _, opt := range in.Opts {
+		var userIds []string
+		err := l.rep.RelationCache.List(
+			&userIds,
+			0,
+			-1,
+			record,
+			"user_id",
+			map[string]interface{}{
+				"recv_msg_opt": opt,
+			},
+			rc.Order("user_id"),
+		)
+		if err != nil {
+			if xormerr.TableNotFound(err) {
+				l.rep.Mysql.Table(record.TableName()).AutoMigrate(record)
+			}
+			if global.RedisErrorNotExists == err {
+				continue
+			}
+			return nil, err
+		}
+		for _, id := range userIds {
+			resp.UserIDOptList = append(resp.UserIDOptList, &pb.UserIDOpt{
+				UserID: id,
+				Opts:   opt,
+			})
+		}
+	}
+	return resp, nil
+}
+
+```
