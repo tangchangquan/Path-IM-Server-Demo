@@ -54,8 +54,8 @@ func BuildClaims(uid, platform string) Claims {
 		UID:      uid,
 		Platform: platform,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(now.Add(time.Hour * 24 * 365 * 1000)), //Expiration time
-			IssuedAt:  jwt.NewNumericDate(now),                                  //Issuing time
-			NotBefore: jwt.NewNumericDate(now),                                  //Begin Effective time
+			ExpiresAt: jwt.NewNumericDate(now.Add(time.Hour * time.Duration(24*365*100))), //Expiration time
+			IssuedAt:  jwt.NewNumericDate(now),                                            //Issuing time
+			NotBefore: jwt.NewNumericDate(now),                                            //Begin Effective time
 		}}
 }

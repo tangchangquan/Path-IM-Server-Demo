@@ -1,0 +1,35 @@
+Name: user-rpc
+ListenOn: 192.168.2.77:10260
+
+Log:
+  ServiceName: user-rpc
+  Level: info
+
+Prometheus:
+  Host: 0.0.0.0
+  Port: 10261
+  Path: /metrics
+
+Telemetry:
+  Name: user-rpc
+  #Endpoint: http://jaeger:14268/api/traces
+  Endpoint: http://127.0.0.1:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
+
+RedisConfig:
+  Host: 192.168.2.77:6379
+  Pass: "123456"
+  Type: node
+  DB: 1
+
+MysqlConfig:
+  Addr: "root:123456@tcp(127.0.0.1:3306)/zeroim?charset=utf8mb4&parseTime=True&loc=Local&timeout=20s&readTimeout=20s&writeTimeout=20s"
+  MaxIdleConns: 10
+  MaxOpenConns: 10
+  LogLevel: INFO
+
+
+MsgGatewayRpc:
+  Endpoints:
+    - 192.168.2.77:10400

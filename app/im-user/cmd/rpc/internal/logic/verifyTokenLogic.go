@@ -6,6 +6,7 @@ import (
 	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
 	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
 	jwtUtils "github.com/showurl/Zero-IM-Server/common/utils/jwt"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -36,10 +37,21 @@ func (l *VerifyTokenLogic) VerifyToken(in *pb.VerifyTokenReq) (*pb.VerifyTokenRe
 	if err != nil {
 		return nil, err
 	}
-	if _, ok := tokenMap[in.Token]; ok {
+	if ex, ok := tokenMap[in.Token]; ok {
+		if time.Now().UnixMilli() > ex {
+			e := l.rep.DeleteToken(l.ctx, claim.UID, claim.Platform, in.Token)
+			if e != nil {
+				l.Errorf("delete token error: %s", e.Error())
+			}
+			return &pb.VerifyTokenResp{
+				Uid:     "",
+				Success: false,
+				ErrMsg:  "token expired",
+			}, nil
+		}
 		// 有的话就更新过期时间
 		go func() {
-			_ = l.rep.RenewalToken(l.ctx, claim.UID, claim.Platform)
+			_ = l.rep.RenewalToken(l.ctx, claim.UID, claim.Platform, in.Token)
 		}()
 		return &pb.VerifyTokenResp{
 			Uid:     claim.UID,

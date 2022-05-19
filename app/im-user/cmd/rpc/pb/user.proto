@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package user;
+
+message User {
+  string Id = 1;
+  string Username = 2;
+  string Password = 3;
+  string Nickname = 4;
+  string Sign = 5;
+  string Avatar = 6;
+  string Province = 7;
+  string City = 8;
+  string District = 9;
+  string Birthday = 10;
+  string RegisterTime = 11;
+  bool IsMale = 12;
+}
+message BaseResp {
+  enum Errno {
+    OK = 0;
+    ERROR = 1;
+  }
+  Errno errCode = 1;
+  string errMsg = 2;
+}
+message GetUserByIdReq {
+  string userId = 1;
+}
+message GetUserByUsernameReq {
+  string username = 1;
+}
+message GetUserResp {
+  User user = 1;
+  BaseResp baseResp = 2;
+}
+message InsertUserReq {
+  User user = 1;
+}
+message InsertUserResp {
+  BaseResp baseResp = 1;
+}
+message UpdateUserReq {
+  User user = 1;
+  repeated string fields = 2;
+}
+message UpdateUserResp {
+  BaseResp baseResp = 1;
+}
+message LoginByPasswordReq {
+  string platform = 1;
+  string username = 2;
+  string password = 3;
+}
+message LoginByIdReq {
+  string userId = 1;
+  string platform = 2;
+}
+message LoginResp {
+  User user = 1;
+  string token = 2;
+  BaseResp baseResp = 3;
+}
+
+service userService {
+  rpc GetUserById(GetUserByIdReq) returns (GetUserResp);
+  rpc GetUserByUsername(GetUserByUsernameReq) returns (GetUserResp);
+  rpc InsertUser(InsertUserReq) returns (InsertUserResp);
+  rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp);
+  rpc LoginByPassword(LoginByPasswordReq) returns (LoginResp);
+  rpc LoginById(LoginByIdReq) returns (LoginResp);
+}

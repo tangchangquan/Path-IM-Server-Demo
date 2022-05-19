@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
 	"github.com/showurl/Zero-IM-Server/app/im-user/model"
-	"github.com/showurl/Zero-IM-Server/common/xcache/dc"
 	"github.com/showurl/Zero-IM-Server/common/xcache/global"
 	xormerr "github.com/showurl/Zero-IM-Server/common/xorm/err"
 
@@ -35,9 +34,11 @@ func (l *GetSingleConversationRecvMsgOptsLogic) GetSingleConversationRecvMsgOpts
 	record := &model.SingleConversationRecord{}
 	record.UserId = in.UserID
 	record.ConversationId = in.ConversationID
-	err := l.rep.DetailCache.FirstByID(
+	err := l.rep.DetailCache.FirstByWhere(
 		record,
-		dc.WithFieldId("conversation_id"),
+		map[string][]interface{}{
+			"conversation_id": {in.ConversationID},
+		},
 	)
 	if err != nil {
 		if xormerr.RecordNotFound(err) || err == global.RedisErrorNotExists {
