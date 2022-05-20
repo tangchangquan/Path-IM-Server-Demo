@@ -12,11 +12,11 @@ func TestInsertUserLogic(t *testing.T) {
 		context.Background(),
 		&pb.InsertUserReq{
 			User: &pb.User{
-				Id:           "",
-				Username:     "showurl_01",
+				Id:           "1",
+				Username:     "user01",
 				Password:     "123456",
-				Nickname:     "第1个注册的人",
-				Sign:         "第1个注册的人，吃瓜",
+				Nickname:     "第user01个注册的人",
+				Sign:         "第user01个注册的人，吃瓜",
 				Avatar:       "https://go.dev/images/gophers/pilot-bust.svg",
 				Province:     "北京市",
 				City:         "北京市",

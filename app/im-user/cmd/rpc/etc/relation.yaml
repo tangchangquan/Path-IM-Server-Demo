@@ -1,17 +1,17 @@
-Name: user-rpc
-ListenOn: 192.168.2.77:10260
+Name: relation-rpc
+ListenOn: 192.168.2.77:10270
 
 Log:
-  ServiceName: user-rpc
+  ServiceName: relation-rpc
   Level: info
 
 Prometheus:
   Host: 0.0.0.0
-  Port: 10261
+  Port: 10271
   Path: /metrics
 
 Telemetry:
-  Name: user-rpc
+  Name: relation-rpc
   #Endpoint: http://jaeger:14268/api/traces
   Endpoint: http://127.0.0.1:14268/api/traces
   Sampler: 1.0

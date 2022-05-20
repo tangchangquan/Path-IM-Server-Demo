@@ -3,6 +3,7 @@ package repository
 import (
 	"github.com/go-redis/redis/v8"
 	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Zero-IM-Server/app/im-user/model"
 	"github.com/showurl/Zero-IM-Server/common/xcache"
 	"github.com/showurl/Zero-IM-Server/common/xcache/dc"
 	"github.com/showurl/Zero-IM-Server/common/xcache/global"
@@ -19,6 +20,10 @@ type Rep struct {
 	RelationCache *rc.RelationMapping
 }
 
+func (r *Rep) CheckDefaultSuperGroup() {
+	_ = xorm.Insert(r.Mysql, model.DefaultGroup)
+}
+
 var rep *Rep
 
 func NewRep(svcCtx *svc.ServiceContext) *Rep {
@@ -32,5 +37,6 @@ func NewRep(svcCtx *svc.ServiceContext) *Rep {
 	}
 	rep.DetailCache = dc.GetDbMapping(rep.Cache, rep.Mysql)
 	rep.RelationCache = rc.NewRelationMapping(rep.Mysql, rep.Cache)
+	rep.CheckDefaultSuperGroup()
 	return rep
 }

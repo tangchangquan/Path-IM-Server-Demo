@@ -32,7 +32,11 @@ func NewIfAInBFriendListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 func (l *IfAInBFriendListLogic) IfAInBFriendList(in *pb.IfAInBFriendListReq) (*pb.IfAInBFriendListResp, error) {
 	friendlist := &model.Friendlist{}
 	friendlist.SelfId = in.BUserID
-	exist, err := l.rep.RelationCache.Exist(in.AUserID, friendlist, "user_id", map[string]interface{}{})
+	exist, err := l.rep.RelationCache.Exist(
+		in.AUserID,
+		friendlist,
+		"user_id",
+		map[string]interface{}{})
 	if err != nil {
 		if xormerr.TableNotFound(err) {
 			_ = l.rep.Mysql.Table(friendlist.TableName()).AutoMigrate(friendlist)

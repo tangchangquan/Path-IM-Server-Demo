@@ -286,7 +286,7 @@ func returnMsg(replay *chatpb.SendMsgResp, pb *chatpb.SendMsgReq, errCode int32,
 }
 
 func (l *SendMsgLogic) userRelationshipVerification(data *chatpb.SendMsgReq) (bool, int32, string) {
-	if data.MsgData.SessionType == types.GroupChatType {
+	if data.MsgData.SessionType == types.GroupChatType || data.MsgData.SessionType == types.SuperGroupChatType {
 		return true, 0, ""
 	}
 	// 是不是拉黑了
@@ -306,6 +306,14 @@ func (l *SendMsgLogic) userRelationshipVerification(data *chatpb.SendMsgReq) (bo
 		}
 	}
 	if l.svcCtx.Config.MessageVerify.FriendVerify {
+		needFriend := true
+		switch data.MsgData.ContentType {
+		case types.NotificationUser2User:
+			needFriend = false
+		}
+		if !needFriend {
+			return true, 0, ""
+		}
 		// 是不是好友
 		ifInFriendResp, err := l.svcCtx.ImUser.IfAInBFriendList(l.ctx, &imuserpb.IfAInBFriendListReq{
 			AUserID: data.MsgData.SendID,

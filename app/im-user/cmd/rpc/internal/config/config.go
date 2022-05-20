@@ -13,6 +13,7 @@ type Config struct {
 	TokenSecret     string `json:",default=zeroimserver"`
 	TokenRenewalDay int64  `json:",default=30"` // 用户每次连接websocket 自动续签的的天数 默认30天
 	MsgGatewayRpc   zrpc.RpcClientConf
+	MsgRpc          zrpc.RpcClientConf
 }
 
 type RedisConfig struct {

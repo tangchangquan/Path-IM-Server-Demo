@@ -1,3 +1,7 @@
+# 群组
+> 用户注册时全部加入默认大群
+
+```go
 package logic
 
 import (
@@ -53,6 +57,8 @@ func (l *InsertUserLogic) InsertUser(in *pb.InsertUserReq) (*pb.InsertUserResp, 
 		l.rep.FuncJoinGroup(user, model.DefaultGroup),
 		// 清除缓存
 		l.rep.FuncDelInsertUserCache(l.ctx, user, model.DefaultGroup),
+		// 向炒鸡大群发一条消息
+		l.rep.FuncSendGroupTextMsg(l.ctx, user, model.DefaultGroup, "大家好，我是 "+user.Nickname),
 	)
 	if err != nil {
 		return &pb.InsertUserResp{
@@ -61,13 +67,6 @@ func (l *InsertUserLogic) InsertUser(in *pb.InsertUserReq) (*pb.InsertUserResp, 
 				ErrMsg:  err.Error(),
 			},
 		}, err
-	}
-	// 向炒鸡大群发一条消息
-	{
-		err := l.rep.SendGroupTextMsg(l.ctx, user, model.DefaultGroup, "大家好，我是 "+user.Nickname)
-		if err != nil {
-			l.Errorf("send group text msg error: %s", err.Error())
-		}
 	}
 	// 预热数据
 	go l.rep.WarmUpUser(l.ctx, user)
@@ -78,3 +77,5 @@ func (l *InsertUserLogic) InsertUser(in *pb.InsertUserReq) (*pb.InsertUserResp, 
 		},
 	}, nil
 }
+
+```

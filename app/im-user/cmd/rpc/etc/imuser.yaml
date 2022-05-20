@@ -28,3 +28,11 @@ MysqlConfig:
   MaxIdleConns: 10
   MaxOpenConns: 10
   LogLevel: INFO
+
+
+MsgGatewayRpc:
+  Endpoints:
+    - 192.168.2.77:10400
+MsgRpc:
+  Endpoints:
+    - 192.168.2.77:10130
