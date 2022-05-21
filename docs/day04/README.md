@@ -140,3 +140,6 @@ func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err erro
 }
 
 ```
+
+## 用户注册 jaeger
+![jaeger.png](https://raw.githubusercontent.com/showurl/Zero-IM-Docs/main/images/202205)
