@@ -1,0 +1,41 @@
+syntax = "v1"
+
+type UserModel struct {
+    ID string `json:"id"`
+    Username string `json:"username"`
+    Nickname string `json:"nickname"`
+    Sign string `json:"sign"`
+    Avatar string `json:"avatar"`
+    Province string `json:"province"`
+    City string `json:"city"`
+    District string `json:"district"`
+    Birthday string `json:"birthday"`
+    RegisterTime string `json:"registerTime"`
+    IsMale bool `json:"isMale"`
+}
+type GetSelfInfoReq struct {
+
+}
+type GetSelfInfoResp struct {
+    UserModel UserModel `json:"userModel"`
+}
+type GetUserByUsernameReq struct {
+    Username string `from:"username"`
+}
+type GetUserByUsernameResp struct {
+    UserModel UserModel `json:"userModel"`
+}
+type ModifySelfInfoReq struct {
+    Nickname string `json:"nickname"`
+    Sign string `json:"sign"`
+    Avatar string `json:"avatar"`
+    Province string `json:"province"`
+    City string `json:"city"`
+    District string `json:"district"`
+    Birthday string `json:"birthday"`
+    IsMale bool `json:"isMale"`
+}
+type ModifySelfInfoResp struct {
+    ErrCode int `json:"errCode"`
+    ErrMsg string `json:"errMsg"`
+}

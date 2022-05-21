@@ -1,0 +1,70 @@
+syntax = "v1"
+type RealtionUser {
+    Id string `json:"id"`
+    Nickname string `json:"nickname"`
+    Sign string `json:"sign"`
+    Avatar string `json:"avatar"`
+    CreateTime string `json:"createTime"`
+}
+type ApplyFriendReq struct {
+    UserId string `json:"userId"`
+    Message string `json:"message"`
+}
+type ApplyFriendResp struct {
+}
+
+type AgreeFriendReq struct {
+    ApplyId string `json:"applyId"`
+}
+type AgreeFriendResp struct {
+}
+
+type RefuseFriendReq struct {
+    ApplyId string `json:"applyId"`
+}
+type RefuseFriendResp struct {
+}
+
+type GetFriendListReq {
+}
+type GetFriendListResp struct {
+    FriendList []RealtionUser `json:"friendList"`
+}
+type GetFriendApplyListReq {
+    PageNo int `from:"pageNo"`
+    PageSize int `from:"pageSize"`
+}
+type GetFriendApplyItem {
+    Id string `json:"id"`
+    Nickname string `json:"nickname"`
+    Sign string `json:"sign"`
+    Avatar string `json:"avatar"`
+    CreateTime string `json:"createTime"`
+    Status int `json:"status"`
+    StatusStr string `json:"statusStr"`
+}
+type GetFriendApplyListResp struct {
+    ApplyList []GetFriendApplyItem `json:"applyList"`
+}
+type DeleteFriendReq {
+    FriendId string `json:"friendId"`
+}
+type DeleteFriendResp struct {
+}
+type BlackUserReq {
+    UserId string `json:"userId"`
+}
+type BlackUserResp {
+}
+type GetBlackListReq {
+    PageNo int `from:"pageNo"`
+    PageSize int `from:"pageSize"`
+}
+type GetBlackListResp struct {
+    BlackList []RealtionUser `json:"blackList"`
+}
+type UnBlackUserReq {
+    UserId string `json:"userId"`
+}
+type UnBlackUserResp {
+}

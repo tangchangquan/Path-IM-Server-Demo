@@ -1,0 +1,114 @@
+syntax = "v1"
+
+info(
+	title: "im用户api 账户"
+	desc: ""
+	author: "showurl"
+	email: "showurl@163.com"
+	version: "v1.0"
+)
+
+import "param/account.api"
+import "param/relation.api"
+import "param/user.api"
+
+@server(
+	group: imuser
+	middleware: JwtAuth
+	prefix: /v1
+)
+service imuser {
+	// *** account *** //
+	@doc(
+		summary: "用户名是否存在"
+	)
+	@handler isUsernameExist
+	get /white/account/exist (IsUsernameExistReq) returns (IsUsernameExistResp)
+	
+	@doc(
+		summary: "注册"
+	)
+	@handler register
+	post /white/account/register (RegisterReq) returns (RegisterResp)
+	
+	@doc(
+		summary: "登录"
+	)
+	@handler login
+	post /white/account/login (LoginReq) returns (LoginResp)
+	
+	// *** user *** //
+	@doc(
+		summary: "获取自己的用户信息"
+	)
+	@handler GetSelfInfo
+	get /user/selfinfo (GetSelfInfoReq) returns (GetSelfInfoResp)
+	
+	@doc(
+		summary: "使用用户名获取用户信息"
+	)
+	@handler GetUserByUsername
+	get /user/getinfobyusername (GetUserByUsernameReq) returns (GetUserByUsernameResp)
+	
+	@doc(
+		summary: "修改用户信息"
+	)
+	@handler UpdateSelfInfo
+	put /user/selfinfo (ModifySelfInfoReq) returns (ModifySelfInfoResp)
+	
+	// *** relation *** //
+	@doc(
+		summary: "申请加好友"
+	)
+	@handler ApplyFriend
+	post /relation/friend/apply (ApplyFriendReq) returns (ApplyFriendResp)
+	
+	@doc(
+		summary: "同意加好友"
+	)
+	@handler AgreeFriend
+	post /relation/friend/agree (AgreeFriendReq) returns (AgreeFriendResp)
+	
+	@doc(
+		summary: "拒绝加好友"
+	)
+	@handler RefuseFriend
+	post /relation/friend/refuse (RefuseFriendReq) returns (RefuseFriendResp)
+	
+	@doc(
+		summary: "获取好友列表"
+	)
+	@handler GetFriendList
+	get /relation/friend/list (GetFriendListReq) returns (GetFriendListResp)
+	
+	@doc(
+		summary: "获取好友请求列表"
+	)
+	@handler GetFriendApplyList
+	get /relation/friend/apply/list (GetFriendApplyListReq) returns (GetFriendApplyListResp)
+	
+	@doc(
+		summary: "删除好友"
+	)
+	@handler DeleteFriend
+	post /relation/friend/delete (DeleteFriendReq) returns (DeleteFriendResp)
+	
+	@doc(
+		summary: "拉黑用户"
+	)
+	@handler BlackUser
+	post /relation/black/add (BlackUserReq) returns (BlackUserResp)
+	
+	@doc(
+		summary: "解除拉黑用户"
+	)
+	@handler UnBlackUser
+	post /relation/black/delete (UnBlackUserReq) returns (UnBlackUserResp)
+	
+	@doc(
+		summary: "获取拉黑用户列表"
+	)
+	@handler GetBlackList
+	get /relation/black/list (GetBlackListReq) returns (GetBlackListResp)
+	
+}

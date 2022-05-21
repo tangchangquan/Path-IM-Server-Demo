@@ -27,6 +27,11 @@ func (s *UserServiceServer) GetUserById(ctx context.Context, in *pb.GetUserByIdR
 	return l.GetUserById(in)
 }
 
+func (s *UserServiceServer) GetUserByIds(ctx context.Context, in *pb.GetUserByIdsReq) (*pb.GetUserListResp, error) {
+	l := logic.NewGetUserByIdsLogic(ctx, s.svcCtx)
+	return l.GetUserByIds(in)
+}
+
 func (s *UserServiceServer) GetUserByUsername(ctx context.Context, in *pb.GetUserByUsernameReq) (*pb.GetUserResp, error) {
 	l := logic.NewGetUserByUsernameLogic(ctx, s.svcCtx)
 	return l.GetUserByUsername(in)

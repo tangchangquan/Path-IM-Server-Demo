@@ -1,0 +1,31 @@
+syntax = "v1"
+
+import "param/user.api"
+
+// 用户名是否存在
+type IsUsernameExistReq struct {
+    Username string `form:"username" binding:"required"`
+}
+type IsUsernameExistResp struct {
+    Exist bool `json:"exist"`
+}
+
+// 注册用户
+type RegisterReq struct {
+    Username string `json:"username" binding:"required"`
+    Password string `json:"password" binding:"required"`
+}
+type RegisterResp {
+    UserModel UserModel `json:"userModel"`
+    Token string `json:"token"`
+}
+
+// 登录
+type LoginReq struct {
+    Username string `json:"username" binding:"required"`
+    Password string `json:"password" binding:"required"`
+}
+type LoginResp {
+    UserModel UserModel `json:"userModel"`
+    Token string `json:"token"`
+}

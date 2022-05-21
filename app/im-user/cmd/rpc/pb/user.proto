@@ -63,9 +63,16 @@ message LoginResp {
   string token = 2;
   BaseResp baseResp = 3;
 }
-
+message GetUserByIdsReq {
+  repeated string userIds = 1;
+}
+message GetUserListResp {
+  repeated User users = 1;
+  BaseResp baseResp = 2;
+}
 service userService {
   rpc GetUserById(GetUserByIdReq) returns (GetUserResp);
+  rpc GetUserByIds(GetUserByIdsReq) returns (GetUserListResp);
   rpc GetUserByUsername(GetUserByUsernameReq) returns (GetUserResp);
   rpc InsertUser(InsertUserReq) returns (InsertUserResp);
   rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp);

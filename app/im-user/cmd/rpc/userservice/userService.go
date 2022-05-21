@@ -15,7 +15,9 @@ import (
 type (
 	BaseResp             = pb.BaseResp
 	GetUserByIdReq       = pb.GetUserByIdReq
+	GetUserByIdsReq      = pb.GetUserByIdsReq
 	GetUserByUsernameReq = pb.GetUserByUsernameReq
+	GetUserListResp      = pb.GetUserListResp
 	GetUserResp          = pb.GetUserResp
 	InsertUserReq        = pb.InsertUserReq
 	InsertUserResp       = pb.InsertUserResp
@@ -28,6 +30,7 @@ type (
 
 	UserService interface {
 		GetUserById(ctx context.Context, in *GetUserByIdReq, opts ...grpc.CallOption) (*GetUserResp, error)
+		GetUserByIds(ctx context.Context, in *GetUserByIdsReq, opts ...grpc.CallOption) (*GetUserListResp, error)
 		GetUserByUsername(ctx context.Context, in *GetUserByUsernameReq, opts ...grpc.CallOption) (*GetUserResp, error)
 		InsertUser(ctx context.Context, in *InsertUserReq, opts ...grpc.CallOption) (*InsertUserResp, error)
 		UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error)
@@ -49,6 +52,11 @@ func NewUserService(cli zrpc.Client) UserService {
 func (m *defaultUserService) GetUserById(ctx context.Context, in *GetUserByIdReq, opts ...grpc.CallOption) (*GetUserResp, error) {
 	client := pb.NewUserServiceClient(m.cli.Conn())
 	return client.GetUserById(ctx, in, opts...)
+}
+
+func (m *defaultUserService) GetUserByIds(ctx context.Context, in *GetUserByIdsReq, opts ...grpc.CallOption) (*GetUserListResp, error) {
+	client := pb.NewUserServiceClient(m.cli.Conn())
+	return client.GetUserByIds(ctx, in, opts...)
 }
 
 func (m *defaultUserService) GetUserByUsername(ctx context.Context, in *GetUserByUsernameReq, opts ...grpc.CallOption) (*GetUserResp, error) {

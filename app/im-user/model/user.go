@@ -9,7 +9,7 @@ import (
 )
 
 type User struct {
-	Id string `gorm:"column:id;primary_key;comment:主键id;type:char(64);"`
+	Id string `gorm:"column:id;primary_key;comment:主键id;type:char(32);"`
 	// 账户
 	Username string `gorm:"column:username;comment:用户名;type:char(31);uniqueIndex;"`
 	Password string `gorm:"column:password;comment:密码;type:char(64);not null;"`
