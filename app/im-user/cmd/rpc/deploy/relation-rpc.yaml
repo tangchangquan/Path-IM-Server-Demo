@@ -1,0 +1,145 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: relation-rpc
+  namespace: zeroim
+  labels:
+    app: relation-rpc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: relation-rpc
+  template:
+    metadata:
+      labels:
+        app: relation-rpc
+    spec:
+      containers:
+      - name: relation-rpc
+        env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: NODE_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          - name: ZEROIM_RESTCONF_SERVICECONF__NAME
+            value: relation-rpc
+          - name: ZEROIM_RPCSERVERCONF__NAME
+            value: relation-rpc
+          - name: ZEROIM_RESTCONF_SERVICECONF_LOG__SERVICENAME
+            value: relation-rpc
+          - name: ZEROIM_RPCSERVERCONF_SERVICECONF_LOG__SERVICENAME
+            value: relation-rpc
+          - name: ZEROIM_RESTCONF_SERVICECONF_TELEMETRY__NAME
+            value: relation-rpc
+          - name: ZEROIM_RPCSERVERCONF_SERVICECONF_TELEMETRY__NAME
+            value: relation-rpc
+        envFrom:
+          - configMapRef:
+              name: zeroim-configmap
+        image: ccr.ccs.tencentyun.com/zeroim/relation-rpc:20220522161609
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sh","-c","sleep 5"]
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          requests:
+            cpu: 100m
+            memory: 60Mi
+          limits:
+            cpu: 100m
+            memory: 60Mi
+        volumeMounts:
+        - name: timezone
+          mountPath: /etc/localtime
+      imagePullSecrets:
+      - name: registry
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: relation-rpc-svc
+  namespace: zeroim
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: relation-rpc
+
+---
+
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: relation-rpc-hpa-c
+  namespace: zeroim
+  labels:
+    app: relation-rpc-hpa-c
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: relation-rpc
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 80
+
+---
+
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: relation-rpc-hpa-m
+  namespace: zeroim
+  labels:
+    app: relation-rpc-hpa-m
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: relation-rpc
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 80

@@ -6,7 +6,8 @@ import (
 )
 
 const (
-	Host = "http://localhost:20010"
+	//Host = "http://localhost:20010"
+	Host = "http://42.194.149.177:10000"
 )
 
 type option struct {

@@ -35,6 +35,10 @@ func NewRep(svcCtx *svc.ServiceContext) *Rep {
 		Cache:  xcache.GetClient(svcCtx.Config.RedisConfig.RedisConf, global.DB(svcCtx.Config.RedisConfig.DB)),
 		Mysql:  xorm.GetClient(svcCtx.Config.MysqlConfig),
 	}
+	err := rep.Mysql.AutoMigrate(&model.User{})
+	if err != nil {
+		panic(err)
+	}
 	rep.DetailCache = dc.GetDbMapping(rep.Cache, rep.Mysql)
 	rep.RelationCache = rc.NewRelationMapping(rep.Mysql, rep.Cache)
 	rep.CheckDefaultSuperGroup()

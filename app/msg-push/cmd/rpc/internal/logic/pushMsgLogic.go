@@ -15,7 +15,6 @@ import (
 	numUtils "github.com/showurl/Zero-IM-Server/common/utils/num"
 	strUtils "github.com/showurl/Zero-IM-Server/common/utils/str"
 	"github.com/showurl/Zero-IM-Server/common/xtrace"
-	"github.com/zeromicro/go-zero/zrpc"
 	"go.opentelemetry.io/otel/attribute"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -58,24 +57,13 @@ func (l *PushMsgLogic) PushMsg(in *pb.PushMsgReq) (*pb.PushMsgResp, error) {
 }
 
 func (l *PushMsgLogic) getAllMsgGatewayService() (services []onlinemessagerelayservice.OnlineMessageRelayService, err error) {
-	for _, endpoint := range l.svcCtx.Config.MsgGatewayRpc.Endpoints {
-		services = append(services, onlinemessagerelayservice.NewOnlineMessageRelayService(
-			zrpc.MustNewClient(zrpc.RpcClientConf{
-				Endpoints: []string{endpoint},
-				Target:    l.svcCtx.Config.MsgGatewayRpc.Target,
-				App:       l.svcCtx.Config.MsgGatewayRpc.App,
-				Token:     l.svcCtx.Config.MsgGatewayRpc.Token,
-				NonBlock:  true,
-				Timeout:   0,
-			}),
-		))
-	}
-	return
+	return onlinemessagerelayservice.GetAll(l.ctx, l.svcCtx.Config.MsgGatewayRpc, l.svcCtx.Config.MsgGatewayRpc.Key)
 }
 
 func (l *PushMsgLogic) MsgToUser(pushMsg *pb.PushMsgReq) {
 	var wsResult []*gatewaypb.SingleMsgToUser
 	isOfflinePush := utils.GetSwitchFromOptions(pushMsg.MsgData.Options, types.IsOfflinePush)
+
 	services, err := l.getAllMsgGatewayService()
 	if err != nil {
 		l.Errorf("getAllMsgGatewayService error: %v", err)

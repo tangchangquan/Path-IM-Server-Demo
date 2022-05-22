@@ -4,13 +4,11 @@ import (
 	"context"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
 	onlinemessagerelayservice "github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/onlineMessageRelayService"
 	gatewaypb "github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/pb"
 	jwtUtils "github.com/showurl/Zero-IM-Server/common/utils/jwt"
-	"github.com/zeromicro/go-zero/zrpc"
-
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -84,17 +82,5 @@ func (l *LoginByIdLogic) LoginById(in *pb.LoginByIdReq) (*pb.LoginResp, error) {
 }
 
 func (l *LoginByIdLogic) getAllMsgGatewayService() (services []onlinemessagerelayservice.OnlineMessageRelayService, err error) {
-	for _, endpoint := range l.svcCtx.Config.MsgGatewayRpc.Endpoints {
-		services = append(services, onlinemessagerelayservice.NewOnlineMessageRelayService(
-			zrpc.MustNewClient(zrpc.RpcClientConf{
-				Endpoints: []string{endpoint},
-				Target:    l.svcCtx.Config.MsgGatewayRpc.Target,
-				App:       l.svcCtx.Config.MsgGatewayRpc.App,
-				Token:     l.svcCtx.Config.MsgGatewayRpc.Token,
-				NonBlock:  true,
-				Timeout:   0,
-			}),
-		))
-	}
-	return
+	return onlinemessagerelayservice.GetAll(l.ctx, l.svcCtx.Config.MsgGatewayRpc, l.svcCtx.Config.MsgGatewayRpc.Key)
 }

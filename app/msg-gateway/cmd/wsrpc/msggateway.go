@@ -10,6 +10,7 @@ import (
 	"github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/internal/wsconfig"
 	"github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/internal/wssvc"
 	"github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/pb"
+	"github.com/showurl/Zero-IM-Server/common/xconf"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -17,7 +18,6 @@ import (
 	"google.golang.org/grpc/reflection"
 	"time"
 
-	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
 )
 
@@ -28,7 +28,7 @@ func ws() {
 	flag.Parse()
 
 	var wsConfig wsconfig.Config
-	conf.MustLoad(*wsConfigFile, &wsConfig)
+	xconf.MustLoad(*wsConfigFile, &wsConfig)
 
 	ctx := wssvc.NewServiceContext(wsConfig)
 	server := rest.MustNewServer(wsConfig.RestConf)
@@ -44,7 +44,7 @@ func rpc() {
 	flag.Parse()
 
 	var c rpcconfig.Config
-	conf.MustLoad(*rpcConfigFile, &c)
+	xconf.MustLoad(*rpcConfigFile, &c)
 	ctx := rpcsvc.NewServiceContext(c)
 	svr := rpcserver.NewOnlineMessageRelayServiceServer(ctx)
 

@@ -19,7 +19,7 @@
 *.idea/
 *bin
 *wrk/
-*.png
 *.jpg
 *.jpeg
 .DS_Store
+*bin

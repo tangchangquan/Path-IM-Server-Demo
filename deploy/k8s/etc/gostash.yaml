@@ -1,0 +1,36 @@
+Clusters:
+  - Input:
+      Kafka:
+        Name: gostash
+        Brokers:
+          - "10.0.8.6:9092"
+        Topics:
+          - zeroim_log
+        Group: pro
+        Consumers: 16
+    Filters:
+      - Action: remove_field
+        Fields:
+          # - message
+          - _source
+          - _type
+          - _score
+          - _id
+          - "@version"
+          - topic
+          - index
+          - beat
+          - docker_container
+          - offset
+          - prospector
+          - source
+          - stream
+          - "@metadata"
+      - Action: transfer
+        Field: message
+        Target: data
+    Output:
+      ElasticSearch:
+        Hosts:
+          - "http://10.0.8.6:9200"
+        Index: "zeroim-{{yyyy-MM-dd}}"

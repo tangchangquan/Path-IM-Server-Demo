@@ -23,8 +23,10 @@ func NewMsgTransferHistoryServer(svcCtx *svc.ServiceContext) *MsgTransferHistory
 	m.msgHandle = make(map[string]fcb)
 	m.msgHandle[svcCtx.Config.Kafka.Online.Topic] = m.ChatMs2Mongo
 	m.historyConsumerGroup = xkafka.NewMConsumerGroup(&xkafka.MConsumerGroupConfig{
+		//KafkaVersion:   sarama.V0_10_2_0,
 		KafkaVersion:   sarama.V0_10_2_0,
-		OffsetsInitial: sarama.OffsetNewest, IsReturnErr: false,
+		OffsetsInitial: sarama.OffsetNewest,
+		IsReturnErr:    false,
 	}, []string{svcCtx.Config.Kafka.Online.Topic},
 		svcCtx.Config.Kafka.Online.Brokers, svcCtx.Config.Kafka.Online.MsgToMongoGroupID)
 	return m

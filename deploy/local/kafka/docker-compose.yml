@@ -38,6 +38,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/kafka
     networks:
       kafka_net:
         ipv4_address: 172.27.10.3

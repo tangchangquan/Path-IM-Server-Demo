@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/showurl/Zero-IM-Server/common/xkafka"
+	"github.com/zeromicro/go-zero/core/discov"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
@@ -10,7 +11,7 @@ type Config struct {
 	PushType string `json:",default=jpns,options=jpns|mobpush"`
 	//MsgGatewayEtcd discov.EtcdConf
 	Jpns                   JpnsConf
-	MsgGatewayRpc          zrpc.RpcClientConf
+	MsgGatewayRpc          discov.EtcdConf
 	ImUserRpc              zrpc.RpcClientConf
 	SinglePushConsumer     SinglePushConsumerConfig
 	SuperGroupPushConsumer SuperGroupPushConsumerConfig
@@ -22,7 +23,6 @@ type JpnsConf struct {
 	MasterSecret   string
 	ApnsProduction bool `json:",default=false"`
 }
-
 type SinglePushConsumerConfig struct {
 	xkafka.ProducerConfig
 	SinglePushGroupID string

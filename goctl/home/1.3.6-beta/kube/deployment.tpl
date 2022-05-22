@@ -19,6 +19,41 @@ spec:
       serviceAccountName: {{.ServiceAccount}}{{end}}
       containers:
       - name: {{.Name}}
+        env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: NODE_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          - name: ZEROIM_RESTCONF_SERVICECONF__NAME
+            value: {{.Name}}
+          - name: ZEROIM_RPCSERVERCONF__NAME
+            value: {{.Name}}
+          - name: ZEROIM_RESTCONF_SERVICECONF_LOG__SERVICENAME
+            value: {{.Name}}
+          - name: ZEROIM_RPCSERVERCONF_SERVICECONF_LOG__SERVICENAME
+            value: {{.Name}}
+          - name: ZEROIM_RESTCONF_SERVICECONF_TELEMETRY__NAME
+            value: {{.Name}}
+          - name: ZEROIM_RPCSERVERCONF_SERVICECONF_TELEMETRY__NAME
+            value: {{.Name}}
+        envFrom:
+          - configMapRef:
+              name: zeroim-configmap
         image: {{.Image}}
         lifecycle:
           preStop:

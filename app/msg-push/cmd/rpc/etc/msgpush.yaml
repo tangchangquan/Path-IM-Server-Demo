@@ -31,8 +31,9 @@ Jpns:
 
 
 MsgGatewayRpc:
-  Endpoints:
-    - 192.168.2.77:10400
+  Hosts:
+    - 192.168.2.77:2379
+  Key: msggateway-rpc
 ImUserRpc:
   Endpoints:
     - 192.168.2.77:10240

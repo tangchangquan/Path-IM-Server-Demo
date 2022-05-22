@@ -1,0 +1,145 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imuser-api
+  namespace: zeroim
+  labels:
+    app: imuser-api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: imuser-api
+  template:
+    metadata:
+      labels:
+        app: imuser-api
+    spec:
+      imagePullSecrets:
+        - name: registry
+      containers:
+      - name: imuser-api
+        env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: NODE_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          - name: ZEROIM_RESTCONF_SERVICECONF__NAME
+            value: imuser-api
+          - name: ZEROIM_RPCSERVERCONF__NAME
+            value: imuser-api
+          - name: ZEROIM_RESTCONF_SERVICECONF_LOG__SERVICENAME
+            value: imuser-api
+          - name: ZEROIM_RPCSERVERCONF_SERVICECONF_LOG__SERVICENAME
+            value: imuser-api
+          - name: ZEROIM_RESTCONF_SERVICECONF_TELEMETRY__NAME
+            value: imuser-api
+          - name: ZEROIM_RPCSERVERCONF_SERVICECONF_TELEMETRY__NAME
+            value: imuser-api
+        envFrom:
+          - configMapRef:
+              name: zeroim-configmap
+        image: ccr.ccs.tencentyun.com/zeroim/imuser-api:20220522112312
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sh","-c","sleep 5"]
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          requests:
+            cpu: 100m
+            memory: 60Mi
+          limits:
+            cpu: 100m
+            memory: 60Mi
+        volumeMounts:
+        - name: timezone
+          mountPath: /etc/localtime
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: imuser-api-svc
+  namespace: zeroim
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: imuser-api
+
+---
+
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: imuser-api-hpa-c
+  namespace: zeroim
+  labels:
+    app: imuser-api-hpa-c
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: imuser-api
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 80
+
+---
+
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: imuser-api-hpa-m
+  namespace: zeroim
+  labels:
+    app: imuser-api-hpa-m
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: imuser-api
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 80
