@@ -16,6 +16,7 @@ spec:
       labels:
         app: imuser-rpc
     spec:
+      serviceAccountName: find-endpoints
       containers:
       - name: imuser-rpc
         env:
@@ -59,15 +60,15 @@ spec:
             exec:
               command: ["sh","-c","sleep 5"]
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         readinessProbe:
           tcpSocket:
-            port: 8080
+            port: 80
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           tcpSocket:
-            port: 8080
+            port: 80
           initialDelaySeconds: 15
           periodSeconds: 20
         resources:
@@ -96,7 +97,7 @@ metadata:
   namespace: zeroim
 spec:
   ports:
-    - port: 8080
+    - port: 80
   selector:
     app: imuser-rpc
 

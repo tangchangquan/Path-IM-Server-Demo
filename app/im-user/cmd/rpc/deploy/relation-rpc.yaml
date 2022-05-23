@@ -16,6 +16,7 @@ spec:
       labels:
         app: relation-rpc
     spec:
+      serviceAccountName: find-endpoints
       containers:
       - name: relation-rpc
         env:

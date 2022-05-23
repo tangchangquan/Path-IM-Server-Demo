@@ -9,12 +9,13 @@ import (
 
 type Config struct {
 	zrpc.RpcServerConf
-	RedisConfig     RedisConfig
-	MysqlConfig     global.MysqlConfig
-	TokenSecret     string          `json:",default=zeroimserver"`
-	TokenRenewalDay int64           `json:",default=30"` // 用户每次连接websocket 自动续签的的天数 默认30天
-	MsgGatewayRpc   discov.EtcdConf `json:",optional"`
-	MsgRpc          zrpc.RpcClientConf
+	RedisConfig            RedisConfig
+	MysqlConfig            global.MysqlConfig
+	TokenSecret            string          `json:",default=zeroimserver"`
+	TokenRenewalDay        int64           `json:",default=30"` // 用户每次连接websocket 自动续签的的天数 默认30天
+	MsgGatewayRpc          discov.EtcdConf `json:",optional"`
+	MsgRpc                 zrpc.RpcClientConf
+	MsgGatewayRpcK8sTarget string `json:",optional"`
 }
 
 type RedisConfig struct {

@@ -16,6 +16,7 @@ spec:
       labels:
         app: imuser-api
     spec:
+      serviceAccountName: find-endpoints
       imagePullSecrets:
         - name: registry
       containers:

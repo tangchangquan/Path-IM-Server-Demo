@@ -16,6 +16,7 @@ spec:
       labels:
         app: msgpush-rpc
     spec:
+      serviceAccountName: find-endpoints
       containers:
       - name: msgpush-rpc
         env:
@@ -53,7 +54,7 @@ spec:
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/msgpush-rpc:20220522182758
+        image: ccr.ccs.tencentyun.com/zeroim/msgpush-rpc:20220523165615
         lifecycle:
           preStop:
             exec:

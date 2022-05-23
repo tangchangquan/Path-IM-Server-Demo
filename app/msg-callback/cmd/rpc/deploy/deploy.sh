@@ -20,4 +20,5 @@ goctl kube deploy \
 --requestCpu 100 \
 --requestMem 60 \
 --secret registry \
+--serviceAccount find-endpoints \
 --home ../../../../../goctl/home

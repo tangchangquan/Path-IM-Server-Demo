@@ -31,6 +31,11 @@ func NewOnlinePushMsgLogic(ctx context.Context, svcCtx *rpcsvc.ServiceContext) *
 
 func (l *OnlinePushMsgLogic) OnlinePushMsg(in *pb.OnlinePushMsgReq) (*pb.OnlinePushMsgResp, error) {
 	logic := wslogic.NewMsggatewayLogic(nil, nil)
+	if logic == nil {
+		return &pb.OnlinePushMsgResp{
+			Resp: nil,
+		}, nil
+	}
 	var resp []*pb.SingleMsgToUser
 	msgBytes, _ := proto.Marshal(in.MsgData)
 	reqIdentifier := types.WSPushMsg

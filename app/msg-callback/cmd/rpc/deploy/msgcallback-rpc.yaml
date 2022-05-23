@@ -16,6 +16,7 @@ spec:
       labels:
         app: msgcallback-rpc
     spec:
+      serviceAccountName: find-endpoints
       containers:
       - name: msgcallback-rpc
         env:

@@ -82,5 +82,9 @@ func (l *LoginByIdLogic) LoginById(in *pb.LoginByIdReq) (*pb.LoginResp, error) {
 }
 
 func (l *LoginByIdLogic) getAllMsgGatewayService() (services []onlinemessagerelayservice.OnlineMessageRelayService, err error) {
-	return onlinemessagerelayservice.GetAll(l.ctx, l.svcCtx.Config.MsgGatewayRpc, l.svcCtx.Config.MsgGatewayRpc.Key)
+	if l.svcCtx.Config.MsgGatewayRpcK8sTarget == "" {
+		return onlinemessagerelayservice.GetAllByEtcd(l.ctx, l.svcCtx.Config.MsgGatewayRpc, l.svcCtx.Config.MsgGatewayRpc.Key)
+	} else {
+		return onlinemessagerelayservice.GetAllByK8s(l.svcCtx.Config.MsgGatewayRpcK8sTarget)
+	}
 }

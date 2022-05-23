@@ -16,6 +16,7 @@ spec:
       labels:
         app: msg-rpc
     spec:
+      serviceAccountName: find-endpoints
       containers:
       - name: msg-rpc
         env:

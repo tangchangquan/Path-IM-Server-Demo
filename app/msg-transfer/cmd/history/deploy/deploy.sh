@@ -15,9 +15,10 @@ goctl kube deploy \
 --name msgtransfer-history \
 --namespace zeroim \
 -o ./msgtransfer-history.yaml \
---port 81 \
+--port 80 \
 --replicas 1 \
 --requestCpu 100 \
 --requestMem 60 \
 --secret registry \
+--serviceAccount find-endpoints \
 --home ../../../../../goctl/home

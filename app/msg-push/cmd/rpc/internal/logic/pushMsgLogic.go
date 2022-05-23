@@ -57,7 +57,11 @@ func (l *PushMsgLogic) PushMsg(in *pb.PushMsgReq) (*pb.PushMsgResp, error) {
 }
 
 func (l *PushMsgLogic) getAllMsgGatewayService() (services []onlinemessagerelayservice.OnlineMessageRelayService, err error) {
-	return onlinemessagerelayservice.GetAll(l.ctx, l.svcCtx.Config.MsgGatewayRpc, l.svcCtx.Config.MsgGatewayRpc.Key)
+	if l.svcCtx.Config.MsgGatewayRpcK8sTarget == "" {
+		return onlinemessagerelayservice.GetAllByEtcd(l.ctx, l.svcCtx.Config.MsgGatewayRpc, l.svcCtx.Config.MsgGatewayRpc.Key)
+	} else {
+		return onlinemessagerelayservice.GetAllByK8s(l.svcCtx.Config.MsgGatewayRpcK8sTarget)
+	}
 }
 
 func (l *PushMsgLogic) MsgToUser(pushMsg *pb.PushMsgReq) {

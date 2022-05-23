@@ -15,6 +15,7 @@ type Config struct {
 	ImUserRpc              zrpc.RpcClientConf
 	SinglePushConsumer     SinglePushConsumerConfig
 	SuperGroupPushConsumer SuperGroupPushConsumerConfig
+	MsgGatewayRpcK8sTarget string `json:",optional"`
 }
 type JpnsConf struct {
 	PushIntent     string

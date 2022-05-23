@@ -16,6 +16,7 @@ spec:
       labels:
         app: msgtransfer-history
     spec:
+      serviceAccountName: find-endpoints
       containers:
       - name: msgtransfer-history
         env:
@@ -53,15 +54,15 @@ spec:
             exec:
               command: ["sh","-c","sleep 5"]
         ports:
-        - containerPort: 81
+        - containerPort: 80
         readinessProbe:
           tcpSocket:
-            port: 81
+            port: 80
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           tcpSocket:
-            port: 81
+            port: 80
           initialDelaySeconds: 15
           periodSeconds: 20
         resources:
@@ -90,7 +91,7 @@ metadata:
   namespace: zeroim
 spec:
   ports:
-    - port: 81
+    - port: 80
   selector:
     app: msgtransfer-history
 

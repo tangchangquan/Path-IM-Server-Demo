@@ -39,6 +39,9 @@ func NewMsggatewayLogic(ctx context.Context, svcCtx *wssvc.ServiceContext) *Msgg
 	if msgGatewayLogic != nil {
 		return msgGatewayLogic
 	}
+	if ctx == nil {
+		return nil
+	}
 	ws := &MsggatewayLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
