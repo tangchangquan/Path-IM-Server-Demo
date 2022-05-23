@@ -1,0 +1,933 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "im用户api 账户",
+    "version": "v1.0"
+  },
+  "host": "42.194.149.177:10000",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/relation/black/add": {
+      "post": {
+        "summary": "拉黑用户",
+        "operationId": "BlackUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/BlackUserResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlackUserReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/relation/black/delete": {
+      "post": {
+        "summary": "解除拉黑用户",
+        "operationId": "UnBlackUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UnBlackUserResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnBlackUserReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/relation/black/list": {
+      "get": {
+        "summary": "获取拉黑用户列表",
+        "operationId": "GetBlackList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetBlackListResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/relation/friend/agree": {
+      "post": {
+        "summary": "同意加好友",
+        "operationId": "AgreeFriend",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/AgreeFriendResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgreeFriendReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/relation/friend/apply": {
+      "post": {
+        "summary": "申请加好友",
+        "operationId": "ApplyFriend",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ApplyFriendResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplyFriendReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/relation/friend/apply/list": {
+      "get": {
+        "summary": "获取好友请求列表",
+        "operationId": "GetFriendApplyList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetFriendApplyListResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/relation/friend/delete": {
+      "post": {
+        "summary": "删除好友",
+        "operationId": "DeleteFriend",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/DeleteFriendResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteFriendReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/relation/friend/list": {
+      "get": {
+        "summary": "获取好友列表",
+        "operationId": "GetFriendList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetFriendListResp"
+            }
+          }
+        },
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/relation/friend/refuse": {
+      "post": {
+        "summary": "拒绝加好友",
+        "operationId": "RefuseFriend",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RefuseFriendResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RefuseFriendReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/user/getinfobyusername": {
+      "get": {
+        "summary": "使用用户名获取用户信息",
+        "operationId": "GetUserByUsername",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetUserByUsernameResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/user/selfinfo": {
+      "get": {
+        "summary": "获取自己的用户信息",
+        "operationId": "GetSelfInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetSelfInfoResp"
+            }
+          }
+        },
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      },
+      "put": {
+        "summary": "修改用户信息",
+        "operationId": "UpdateSelfInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ModifySelfInfoResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModifySelfInfoReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/white/account/exist": {
+      "get": {
+        "summary": "用户名是否存在",
+        "operationId": "isUsernameExist",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/IsUsernameExistResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "required",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/white/account/login": {
+      "post": {
+        "summary": "登录",
+        "operationId": "login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LoginResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " 登录",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    },
+    "/v1/white/account/register": {
+      "post": {
+        "summary": "注册",
+        "operationId": "register",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RegisterResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " 注册用户",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "imuser"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AgreeFriendReq": {
+      "type": "object",
+      "properties": {
+        "applyId": {
+          "type": "string"
+        }
+      },
+      "title": "AgreeFriendReq",
+      "required": [
+        "applyId"
+      ]
+    },
+    "AgreeFriendResp": {
+      "type": "object",
+      "title": "AgreeFriendResp"
+    },
+    "ApplyFriendReq": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "ApplyFriendReq",
+      "required": [
+        "userId",
+        "message"
+      ]
+    },
+    "ApplyFriendResp": {
+      "type": "object",
+      "title": "ApplyFriendResp"
+    },
+    "BlackUserReq": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      },
+      "title": "BlackUserReq",
+      "required": [
+        "userId"
+      ]
+    },
+    "BlackUserResp": {
+      "type": "object",
+      "title": "BlackUserResp"
+    },
+    "DeleteFriendReq": {
+      "type": "object",
+      "properties": {
+        "friendId": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteFriendReq",
+      "required": [
+        "friendId"
+      ]
+    },
+    "DeleteFriendResp": {
+      "type": "object",
+      "title": "DeleteFriendResp"
+    },
+    "GetBlackListReq": {
+      "type": "object",
+      "properties": {
+        "PageNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "PageSize": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "GetBlackListReq",
+      "required": [
+        "pageNo",
+        "pageSize"
+      ]
+    },
+    "GetBlackListResp": {
+      "type": "object",
+      "properties": {
+        "blackList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtionUser"
+          }
+        }
+      },
+      "title": "GetBlackListResp",
+      "required": [
+        "blackList"
+      ]
+    },
+    "GetFriendApplyItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "statusStr": {
+          "type": "string"
+        }
+      },
+      "title": "GetFriendApplyItem",
+      "required": [
+        "id",
+        "nickname",
+        "sign",
+        "avatar",
+        "createTime",
+        "status",
+        "statusStr"
+      ]
+    },
+    "GetFriendApplyListReq": {
+      "type": "object",
+      "properties": {
+        "PageNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "PageSize": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "GetFriendApplyListReq",
+      "required": [
+        "pageNo",
+        "pageSize"
+      ]
+    },
+    "GetFriendApplyListResp": {
+      "type": "object",
+      "properties": {
+        "applyList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GetFriendApplyItem"
+          }
+        }
+      },
+      "title": "GetFriendApplyListResp",
+      "required": [
+        "applyList"
+      ]
+    },
+    "GetFriendListReq": {
+      "type": "object",
+      "title": "GetFriendListReq"
+    },
+    "GetFriendListResp": {
+      "type": "object",
+      "properties": {
+        "friendList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtionUser"
+          }
+        }
+      },
+      "title": "GetFriendListResp",
+      "required": [
+        "friendList"
+      ]
+    },
+    "GetSelfInfoReq": {
+      "type": "object",
+      "title": "GetSelfInfoReq"
+    },
+    "GetSelfInfoResp": {
+      "type": "object",
+      "properties": {
+        "userModel": {
+          "$ref": "#/definitions/UserModel"
+        }
+      },
+      "title": "GetSelfInfoResp",
+      "required": [
+        "userModel"
+      ]
+    },
+    "GetUserByUsernameReq": {
+      "type": "object",
+      "properties": {
+        "Username": {
+          "type": "string"
+        }
+      },
+      "title": "GetUserByUsernameReq",
+      "required": [
+        "username"
+      ]
+    },
+    "GetUserByUsernameResp": {
+      "type": "object",
+      "properties": {
+        "userModel": {
+          "$ref": "#/definitions/UserModel"
+        }
+      },
+      "title": "GetUserByUsernameResp",
+      "required": [
+        "userModel"
+      ]
+    },
+    "IsUsernameExistReq": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "IsUsernameExistReq",
+      "required": [
+        "username"
+      ]
+    },
+    "IsUsernameExistResp": {
+      "type": "object",
+      "properties": {
+        "exist": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "IsUsernameExistResp",
+      "required": [
+        "exist"
+      ]
+    },
+    "LoginReq": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "LoginReq",
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "LoginResp": {
+      "type": "object",
+      "properties": {
+        "userModel": {
+          "$ref": "#/definitions/UserModel"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "title": "LoginResp",
+      "required": [
+        "userModel",
+        "token"
+      ]
+    },
+    "ModifySelfInfoReq": {
+      "type": "object",
+      "properties": {
+        "nickname": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "isMale": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "ModifySelfInfoReq",
+      "required": [
+        "nickname",
+        "sign",
+        "avatar",
+        "province",
+        "city",
+        "district",
+        "birthday",
+        "isMale"
+      ]
+    },
+    "ModifySelfInfoResp": {
+      "type": "object",
+      "properties": {
+        "errCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "errMsg": {
+          "type": "string"
+        }
+      },
+      "title": "ModifySelfInfoResp",
+      "required": [
+        "errCode",
+        "errMsg"
+      ]
+    },
+    "RealtionUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string"
+        }
+      },
+      "title": "RealtionUser",
+      "required": [
+        "id",
+        "nickname",
+        "sign",
+        "avatar",
+        "createTime"
+      ]
+    },
+    "RefuseFriendReq": {
+      "type": "object",
+      "properties": {
+        "applyId": {
+          "type": "string"
+        }
+      },
+      "title": "RefuseFriendReq",
+      "required": [
+        "applyId"
+      ]
+    },
+    "RefuseFriendResp": {
+      "type": "object",
+      "title": "RefuseFriendResp"
+    },
+    "RegisterReq": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "RegisterReq",
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "RegisterResp": {
+      "type": "object",
+      "properties": {
+        "userModel": {
+          "$ref": "#/definitions/UserModel"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "title": "RegisterResp",
+      "required": [
+        "userModel",
+        "token"
+      ]
+    },
+    "UnBlackUserReq": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      },
+      "title": "UnBlackUserReq",
+      "required": [
+        "userId"
+      ]
+    },
+    "UnBlackUserResp": {
+      "type": "object",
+      "title": "UnBlackUserResp"
+    },
+    "UserModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "district": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "registerTime": {
+          "type": "string"
+        },
+        "isMale": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "UserModel",
+      "required": [
+        "id",
+        "username",
+        "nickname",
+        "sign",
+        "avatar",
+        "province",
+        "city",
+        "district",
+        "birthday",
+        "registerTime",
+        "isMale"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}

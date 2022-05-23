@@ -64,7 +64,7 @@ func (l *InsertUserLogic) InsertUser(in *pb.InsertUserReq) (*pb.InsertUserResp, 
 	}
 	// 向炒鸡大群发一条消息
 	{
-		err := l.rep.SendGroupTextMsg(l.ctx, user, model.DefaultGroup, "大家好，我是 "+user.Nickname)
+		err := l.rep.SendGroupTextMsg(l.ctx, user, model.DefaultGroup, "大家好，我是 "+user.Nickname+"，用户名："+user.Username+"，我们来聊天吧！")
 		if err != nil {
 			l.Errorf("send group text msg error: %s", err.Error())
 		}
