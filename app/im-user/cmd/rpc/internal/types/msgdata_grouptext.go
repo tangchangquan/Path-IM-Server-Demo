@@ -25,7 +25,7 @@ func NewGroupTextMsg(
 		//SenderPlatformID: 0,
 		//SenderNickname:   "",
 		//SenderFaceURL:    "",
-		SessionType: types.SuperGroupChatType,
+		SessionType: types.GroupChatType,
 		MsgFrom:     types.SysMsgType,
 		ContentType: types.Text,
 		Content:     buf,

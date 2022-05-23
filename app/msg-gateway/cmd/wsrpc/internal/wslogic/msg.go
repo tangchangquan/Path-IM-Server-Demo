@@ -1,23 +1,23 @@
 package wslogic
 
 import (
-	"bytes"
 	"context"
-	"encoding/gob"
 	"github.com/golang/protobuf/proto"
 	"github.com/gorilla/websocket"
+	imuserpb "github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/pb"
 	"github.com/showurl/Zero-IM-Server/app/msg/cmd/rpc/chat"
 	chatpb "github.com/showurl/Zero-IM-Server/app/msg/cmd/rpc/pb"
 	"github.com/showurl/Zero-IM-Server/common/types"
+	"github.com/showurl/Zero-IM-Server/common/utils"
 	"github.com/showurl/Zero-IM-Server/common/xerr"
+	"github.com/showurl/Zero-IM-Server/common/xtrace"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
 func (l *MsggatewayLogic) msgParse(ctx context.Context, conn *UserConn, binaryMsg []byte) {
-	b := bytes.NewBuffer(binaryMsg)
-	m := Req{}
-	dec := gob.NewDecoder(b)
-	err := dec.Decode(&m)
+	m := &pb.Req{}
+	err := proto.Unmarshal(binaryMsg, m)
 	if err != nil {
 		l.sendErrMsg(ctx, conn, 200, err.Error(), types.WSDataError, "")
 		err = conn.Close()
@@ -31,30 +31,46 @@ func (l *MsggatewayLogic) msgParse(ctx context.Context, conn *UserConn, binaryMs
 		l.sendErrMsg(ctx, conn, 201, err.Error(), xerr.NewErrCode(int(m.ReqIdentifier)), m.MsgIncr)
 		return
 	}
+	if !l.svcCtx.Config.VerifyTokenOnce {
+		tokenInvalid := false
+		tokenInvalidMsg := ""
+		xtrace.StartFuncSpan(ctx, utils.CallerFuncName(), func(ctx context.Context) {
+			uid, platform := l.getUserUid(conn)
+			tokenResp, err1 := l.svcCtx.ImUserService.VerifyToken(ctx, &imuserpb.VerifyTokenReq{
+				Token:    m.Token,
+				Platform: platform,
+				SendID:   uid,
+			})
+			if err1 != nil {
+				tokenInvalid = true
+				tokenInvalidMsg = "server error"
+				logx.WithContext(ctx).Error("ws verify token err", err1.Error())
+				return
+			}
+			if !tokenResp.Success {
+				tokenInvalid = true
+				tokenInvalidMsg = tokenResp.ErrMsg
+				logx.WithContext(ctx).Error("ws verify token err", "token invalid")
+				return
+			}
+		})
+		if tokenInvalid {
+			l.sendErrMsg(ctx, conn, 202, tokenInvalidMsg, xerr.NewErrCode(int(m.ReqIdentifier)), m.MsgIncr)
+			return
+		}
+	}
 	switch m.ReqIdentifier {
 	case types.WSGetNewestSeq:
-		l.getSeqReq(ctx, conn, &m)
-	case types.WSGetNewestSuperGroupSeq:
-		l.getSuperGroupSeqReq(ctx, conn, &m)
+		l.getSeqReq(ctx, conn, m)
+	case types.WSGetNewestGroupSeq:
+		l.getSuperGroupSeqReq(ctx, conn, m)
 	case types.WSSendMsg:
-		l.sendMsgReq(ctx, conn, &m)
-	case types.WSSendSignalMsg:
-		l.sendSignalMsgReq(ctx, conn, &m)
+		l.sendMsgReq(ctx, conn, m)
 	case types.WSPullMsgBySeqList:
-		l.pullMsgBySeqListReq(ctx, conn, &m)
-	case types.WSPullMsgBySuperGroupSeqList:
-		l.pullMsgBySuperGroupSeqListReq(ctx, conn, &m)
+		l.pullMsgBySeqListReq(ctx, conn, m)
+	case types.WSPullMsgByGroupSeqList:
+		l.pullMsgBySuperGroupSeqListReq(ctx, conn, m)
 	default:
-	}
-}
-func (l *MsggatewayLogic) sendSignalMsgReq(ctx context.Context, conn *UserConn, m *Req) {
-	logx.WithContext(ctx).Info("Ws call success to sendSignalMsgReq start", m.MsgIncr, m.ReqIdentifier, m.SendID, m.Data)
-	//nReply := new(chatpb.SendMsgResp)
-	isPass, errCode, errMsg, _ := l.argsValidate(m, types.WSSendSignalMsg)
-	if isPass {
-		l.sendSignalMsgResp(ctx, conn, 204, "grpc SignalMessageAssemble failed: 不支持了", m)
-	} else {
-		l.sendSignalMsgResp(ctx, conn, errCode, errMsg, m)
 	}
 }
 
@@ -80,15 +96,20 @@ func (l *MsggatewayLogic) sendErrMsg(ctx context.Context, conn *UserConn, code i
 }
 
 func (l *MsggatewayLogic) sendMsg(ctx context.Context, conn *UserConn, mReply Resp) {
-	var b bytes.Buffer
-	enc := gob.NewEncoder(&b)
-	err := enc.Encode(mReply)
+	resp := &pb.Resp{
+		ReqIdentifier: uint32(mReply.ReqIdentifier),
+		MsgIncr:       mReply.MsgIncr,
+		ErrCode:       uint32(mReply.ErrCode),
+		ErrMsg:        mReply.ErrMsg,
+		Data:          mReply.Data,
+	}
+	b, err := proto.Marshal(resp)
 	if err != nil {
 		uid, platform := l.getUserUid(conn)
 		logx.WithContext(ctx).Error(mReply.ReqIdentifier, mReply.ErrCode, mReply.ErrMsg, "Encode Msg error", conn.RemoteAddr().String(), uid, platform, err.Error())
 		return
 	}
-	err = l.writeMsg(conn, websocket.BinaryMessage, b.Bytes())
+	err = l.writeMsg(conn, websocket.BinaryMessage, b)
 	if err != nil {
 		uid, platform := l.getUserUid(conn)
 		logx.WithContext(ctx).Error(mReply.ReqIdentifier, mReply.ErrCode, mReply.ErrMsg, "WS WriteMsg error", conn.RemoteAddr().String(), uid, platform, err.Error())
@@ -101,7 +122,7 @@ func (l *MsggatewayLogic) writeMsg(conn *UserConn, a int, msg []byte) error {
 	return conn.WriteMessage(a, msg)
 }
 
-func (l *MsggatewayLogic) sendMsgReq(ctx context.Context, conn *UserConn, m *Req) {
+func (l *MsggatewayLogic) sendMsgReq(ctx context.Context, conn *UserConn, m *pb.Req) {
 	sendMsgAllCount++
 	logx.WithContext(ctx).Info("Ws call success to sendMsgReq start", m.MsgIncr, m.ReqIdentifier, m.SendID, m.Data)
 	nReply := new(chatpb.SendMsgResp)
@@ -131,14 +152,14 @@ func (l *MsggatewayLogic) sendMsgReq(ctx context.Context, conn *UserConn, m *Req
 	}
 }
 
-func (l *MsggatewayLogic) sendMsgResp(ctx context.Context, conn *UserConn, m *Req, pb *chat.SendMsgResp) {
+func (l *MsggatewayLogic) sendMsgResp(ctx context.Context, conn *UserConn, m *pb.Req, pb *chat.SendMsgResp) {
 	var mReplyData chatpb.UserSendMsgResp
 	mReplyData.ClientMsgID = pb.GetClientMsgID()
 	mReplyData.ServerMsgID = pb.GetServerMsgID()
 	mReplyData.SendTime = pb.GetSendTime()
 	b, _ := proto.Marshal(&mReplyData)
 	mReply := Resp{
-		ReqIdentifier: m.ReqIdentifier,
+		ReqIdentifier: int32(m.ReqIdentifier),
 		MsgIncr:       m.MsgIncr,
 		ErrCode:       pb.GetErrCode(),
 		ErrMsg:        pb.GetErrMsg(),
@@ -147,7 +168,7 @@ func (l *MsggatewayLogic) sendMsgResp(ctx context.Context, conn *UserConn, m *Re
 	l.sendMsg(ctx, conn, mReply)
 }
 
-func (l *MsggatewayLogic) pullMsgBySeqListReq(ctx context.Context, conn *UserConn, m *Req) {
+func (l *MsggatewayLogic) pullMsgBySeqListReq(ctx context.Context, conn *UserConn, m *pb.Req) {
 	logx.WithContext(ctx).Info("Ws call success to pullMsgBySeqListReq start", m.SendID, m.ReqIdentifier, m.MsgIncr, m.Data)
 	nReply := new(chatpb.PullMessageBySeqListResp)
 	isPass, errCode, errMsg, data := l.argsValidate(m, types.WSPullMsgBySeqList)
@@ -173,10 +194,10 @@ func (l *MsggatewayLogic) pullMsgBySeqListReq(ctx context.Context, conn *UserCon
 	}
 }
 
-func (l *MsggatewayLogic) pullMsgBySuperGroupSeqListReq(ctx context.Context, conn *UserConn, m *Req) {
+func (l *MsggatewayLogic) pullMsgBySuperGroupSeqListReq(ctx context.Context, conn *UserConn, m *pb.Req) {
 	logx.WithContext(ctx).Info("Ws call success to pullMsgBySuperGroupSeqListReq start", m.SendID, m.ReqIdentifier, m.MsgIncr, m.Data)
 	nReply := new(chatpb.PullMessageBySeqListResp)
-	isPass, errCode, errMsg, data := l.argsValidate(m, types.WSPullMsgBySuperGroupSeqList)
+	isPass, errCode, errMsg, data := l.argsValidate(m, types.WSPullMsgByGroupSeqList)
 	if isPass {
 		rpcReq := chatpb.PullMessageBySuperGroupSeqListReq{}
 		rpcReq.SeqList = data.(chatpb.PullMessageBySuperGroupSeqListReq).SeqList
@@ -199,11 +220,11 @@ func (l *MsggatewayLogic) pullMsgBySuperGroupSeqListReq(ctx context.Context, con
 	}
 }
 
-func (l *MsggatewayLogic) pullMsgBySeqListResp(ctx context.Context, conn *UserConn, m *Req, pb *chatpb.PullMessageBySeqListResp) {
+func (l *MsggatewayLogic) pullMsgBySeqListResp(ctx context.Context, conn *UserConn, m *pb.Req, pb *chatpb.PullMessageBySeqListResp) {
 	logx.WithContext(ctx).Info("pullMsgBySeqListResp come  here ", pb.String())
 	c, _ := proto.Marshal(pb)
 	mReply := Resp{
-		ReqIdentifier: m.ReqIdentifier,
+		ReqIdentifier: int32(m.ReqIdentifier),
 		MsgIncr:       m.MsgIncr,
 		ErrCode:       pb.GetErrCode(),
 		ErrMsg:        pb.GetErrMsg(),
@@ -215,11 +236,11 @@ func (l *MsggatewayLogic) pullMsgBySeqListResp(ctx context.Context, conn *UserCo
 	l.sendMsg(ctx, conn, mReply)
 }
 
-func (l *MsggatewayLogic) pullMsgBySuperGroupSeqListResp(ctx context.Context, conn *UserConn, m *Req, pb *chatpb.PullMessageBySeqListResp) {
+func (l *MsggatewayLogic) pullMsgBySuperGroupSeqListResp(ctx context.Context, conn *UserConn, m *pb.Req, pb *chatpb.PullMessageBySeqListResp) {
 	logx.WithContext(ctx).Info("pullMsgBySuperGroupSeqListResp come  here ", pb.String())
 	c, _ := proto.Marshal(pb)
 	mReply := Resp{
-		ReqIdentifier: m.ReqIdentifier,
+		ReqIdentifier: int32(m.ReqIdentifier),
 		MsgIncr:       m.MsgIncr,
 		ErrCode:       pb.GetErrCode(),
 		ErrMsg:        pb.GetErrMsg(),

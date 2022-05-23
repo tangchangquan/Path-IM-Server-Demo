@@ -54,7 +54,7 @@ spec:
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/relation-rpc:20220522161609
+        image: ccr.ccs.tencentyun.com/zeroim/relation-rpc:20220523233849
         lifecycle:
           preStop:
             exec:

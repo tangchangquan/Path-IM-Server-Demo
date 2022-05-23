@@ -2,6 +2,7 @@ package wslogic
 
 import (
 	"github.com/golang/protobuf/proto"
+	msggatewaypb "github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/pb"
 	chatpb "github.com/showurl/Zero-IM-Server/app/msg/cmd/rpc/pb"
 	"github.com/showurl/Zero-IM-Server/common/types"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -48,7 +49,7 @@ type SeqListData struct {
 	SeqList []int64 `mapstructure:"seqList" validate:"required"`
 }
 
-func (l *MsggatewayLogic) argsValidate(m *Req, r int32) (isPass bool, errCode int32, errMsg string, returnData interface{}) {
+func (l *MsggatewayLogic) argsValidate(m *msggatewaypb.Req, r int32) (isPass bool, errCode int32, errMsg string, returnData interface{}) {
 	switch r {
 	case types.WSSendMsg:
 		data := chatpb.MsgData{}
@@ -62,18 +63,6 @@ func (l *MsggatewayLogic) argsValidate(m *Req, r int32) (isPass bool, errCode in
 
 		}
 		return true, 0, "", data
-	case types.WSSendSignalMsg:
-		data := chatpb.SignalReq{}
-		if err := proto.Unmarshal(m.Data, &data); err != nil {
-			logx.WithContext(l.ctx).Error("Decode Data struct  err", err.Error(), r)
-			return false, 203, err.Error(), nil
-		}
-		if err := validate.Struct(data); err != nil {
-			logx.WithContext(l.ctx).Error("data args validate  err", err.Error(), r)
-			return false, 204, err.Error(), nil
-
-		}
-		return true, 0, "", &data
 	case types.WSPullMsgBySeqList:
 		data := chatpb.PullMessageBySeqListReq{}
 		if err := proto.Unmarshal(m.Data, &data); err != nil {
@@ -85,7 +74,7 @@ func (l *MsggatewayLogic) argsValidate(m *Req, r int32) (isPass bool, errCode in
 			return false, 204, err.Error(), nil
 		}
 		return true, 0, "", data
-	case types.WSPullMsgBySuperGroupSeqList:
+	case types.WSPullMsgByGroupSeqList:
 		data := chatpb.PullMessageBySuperGroupSeqListReq{}
 		if err := proto.Unmarshal(m.Data, &data); err != nil {
 			logx.WithContext(l.ctx).Error("Decode Data struct  err", err.Error(), r)

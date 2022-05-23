@@ -39,16 +39,22 @@ spec:
               fieldRef:
                 apiVersion: v1
                 fieldPath: status.podIP
-          - name: ZEROIM_SERVICECONF__NAME
+          - name: ZEROIM_RESTCONF_SERVICECONF__NAME
             value: msgtransfer-history
-          - name: ZEROIM_SERVICECONF_LOG__SERVICENAME
+          - name: ZEROIM_RPCSERVERCONF__NAME
             value: msgtransfer-history
-          - name: ZEROIM_SERVICECONF_TELEMETRY__NAME
+          - name: ZEROIM_RESTCONF_SERVICECONF_LOG__SERVICENAME
+            value: msgtransfer-history
+          - name: ZEROIM_RPCSERVERCONF_SERVICECONF_LOG__SERVICENAME
+            value: msgtransfer-history
+          - name: ZEROIM_RESTCONF_SERVICECONF_TELEMETRY__NAME
+            value: msgtransfer-history
+          - name: ZEROIM_RPCSERVERCONF_SERVICECONF_TELEMETRY__NAME
             value: msgtransfer-history
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/msgtransfer-history:20220522184310
+        image: ccr.ccs.tencentyun.com/zeroim/msgtransfer-history:20220523234415
         lifecycle:
           preStop:
             exec:

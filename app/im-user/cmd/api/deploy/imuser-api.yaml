@@ -17,8 +17,6 @@ spec:
         app: imuser-api
     spec:
       serviceAccountName: find-endpoints
-      imagePullSecrets:
-        - name: registry
       containers:
       - name: imuser-api
         env:
@@ -56,21 +54,21 @@ spec:
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/imuser-api:20220522112312
+        image: ccr.ccs.tencentyun.com/zeroim/imuser-api:20220523233653
         lifecycle:
           preStop:
             exec:
               command: ["sh","-c","sleep 5"]
         ports:
-        - containerPort: 80
+        - containerPort: 9090
         readinessProbe:
           tcpSocket:
-            port: 80
+            port: 9090
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           tcpSocket:
-            port: 80
+            port: 9090
           initialDelaySeconds: 15
           periodSeconds: 20
         resources:
@@ -83,6 +81,8 @@ spec:
         volumeMounts:
         - name: timezone
           mountPath: /etc/localtime
+      imagePullSecrets:
+      - name: registry
       volumes:
         - name: timezone
           hostPath:
@@ -97,7 +97,7 @@ metadata:
   namespace: zeroim
 spec:
   ports:
-    - port: 80
+    - port: 9090
   selector:
     app: imuser-api
 

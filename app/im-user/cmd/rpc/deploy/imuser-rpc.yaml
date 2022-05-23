@@ -54,21 +54,21 @@ spec:
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/imuser-rpc:20220522153308
+        image: ccr.ccs.tencentyun.com/zeroim/imuser-rpc:20220523233839
         lifecycle:
           preStop:
             exec:
               command: ["sh","-c","sleep 5"]
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         readinessProbe:
           tcpSocket:
-            port: 80
+            port: 8080
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           tcpSocket:
-            port: 80
+            port: 8080
           initialDelaySeconds: 15
           periodSeconds: 20
         resources:
@@ -97,7 +97,7 @@ metadata:
   namespace: zeroim
 spec:
   ports:
-    - port: 80
+    - port: 8080
   selector:
     app: imuser-rpc
 
