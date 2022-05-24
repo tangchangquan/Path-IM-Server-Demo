@@ -54,7 +54,7 @@ spec:
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/imuser-api:20220523233653
+        image: ccr.ccs.tencentyun.com/zeroim/imuser-api:20220524175654
         lifecycle:
           preStop:
             exec:
