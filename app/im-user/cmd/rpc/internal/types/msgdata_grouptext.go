@@ -2,10 +2,10 @@ package types
 
 import (
 	"encoding/json"
-	chatpb "github.com/showurl/Zero-IM-Server/app/msg/cmd/rpc/pb"
-	"github.com/showurl/Zero-IM-Server/common/types"
-	timeUtils "github.com/showurl/Zero-IM-Server/common/utils/time"
-	"github.com/showurl/Zero-IM-Server/common/xorm/global"
+	chatpb "github.com/showurl/Path-IM-Server/app/msg/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/common/types"
+	timeUtils "github.com/showurl/Path-IM-Server/common/utils/time"
+	"github.com/showurl/Path-IM-Server/common/xorm/global"
 )
 
 func NewGroupTextMsg(

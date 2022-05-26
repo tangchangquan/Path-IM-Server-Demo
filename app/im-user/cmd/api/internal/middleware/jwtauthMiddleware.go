@@ -2,11 +2,11 @@ package middleware
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/imuserservice"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
-	"github.com/showurl/Zero-IM-Server/common/ctxdata"
-	"github.com/showurl/Zero-IM-Server/common/xerr"
-	"github.com/showurl/Zero-IM-Server/common/xhttp"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/imuserservice"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/common/ctxdata"
+	"github.com/showurl/Path-IM-Server/common/xerr"
+	"github.com/showurl/Path-IM-Server/common/xhttp"
 	"github.com/zeromicro/go-zero/core/logx"
 	"net/http"
 	"strings"

@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/model"
+	"github.com/showurl/Path-IM-Server/app/im-user/model"
 	"gorm.io/gorm"
 )
 

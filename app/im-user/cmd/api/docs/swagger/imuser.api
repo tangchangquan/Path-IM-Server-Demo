@@ -30,9 +30,15 @@ type GetSelfInfoResp struct {
 	UserModel UserModel `json:"userModel"`
 }
 type GetUserByUsernameReq struct {
-	Username string `from:"username"`
+	Username string `form:"username"`
 }
 type GetUserByUsernameResp struct {
+	UserModel UserModel `json:"userModel"`
+}
+type GetUserByIdReq struct {
+	Id string `form:"id"`
+}
+type GetUserByIdResp struct {
 	UserModel UserModel `json:"userModel"`
 }
 type ModifySelfInfoReq struct {
@@ -83,8 +89,8 @@ type GetFriendListResp struct {
 	FriendList []RealtionUser `json:"friendList"`
 }
 type GetFriendApplyListReq {
-	PageNo int `from:"pageNo"`
-	PageSize int `from:"pageSize"`
+	PageNo int `form:"pageNo"`
+	PageSize int `form:"pageSize"`
 }
 type GetFriendApplyItem {
 	Id string `json:"id"`
@@ -109,8 +115,8 @@ type BlackUserReq {
 type BlackUserResp {
 }
 type GetBlackListReq {
-	PageNo int `from:"pageNo"`
-	PageSize int `from:"pageSize"`
+	PageNo int `form:"pageNo"`
+	PageSize int `form:"pageSize"`
 }
 type GetBlackListResp struct {
 	BlackList []RealtionUser `json:"blackList"`
@@ -125,7 +131,7 @@ type UnBlackUserResp {
 
 // 用户名是否存在
 type IsUsernameExistReq struct {
-	Username string `form:"username" binding:"required"`
+	Username string `json:"username"`
 }
 type IsUsernameExistResp struct {
 	Exist bool `json:"exist"`
@@ -133,8 +139,8 @@ type IsUsernameExistResp struct {
 
 // 注册用户
 type RegisterReq struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 type RegisterResp {
 	UserModel UserModel `json:"userModel"`
@@ -143,8 +149,8 @@ type RegisterResp {
 
 // 登录
 type LoginReq struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 type LoginResp {
 	UserModel UserModel `json:"userModel"`
@@ -189,6 +195,12 @@ service imuser {
 	)
 	@handler GetUserByUsername
 	get /user/getinfobyusername (GetUserByUsernameReq) returns (GetUserByUsernameResp)
+
+	@doc(
+		summary: "使用id获取用户信息"
+	)
+	@handler GetUserById
+	get /user/getinfobyid (GetUserByIdReq) returns (GetUserByIdResp)
 	
 	@doc(
 		summary: "修改用户信息"

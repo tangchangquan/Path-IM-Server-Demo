@@ -31,8 +31,8 @@ type GetFriendListResp struct {
     FriendList []RealtionUser `json:"friendList"`
 }
 type GetFriendApplyListReq {
-    PageNo int `from:"pageNo"`
-    PageSize int `from:"pageSize"`
+    PageNo int `form:"pageNo"`
+    PageSize int `form:"pageSize"`
 }
 type GetFriendApplyItem {
     Id string `json:"id"`
@@ -57,8 +57,8 @@ type BlackUserReq {
 type BlackUserResp {
 }
 type GetBlackListReq {
-    PageNo int `from:"pageNo"`
-    PageSize int `from:"pageSize"`
+    PageNo int `form:"pageNo"`
+    PageSize int `form:"pageSize"`
 }
 type GetBlackListResp struct {
     BlackList []RealtionUser `json:"blackList"`

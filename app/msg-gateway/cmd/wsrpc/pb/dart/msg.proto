@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package pb;
+
+message MsgData {
+  string  sendID = 1;
+  string  recvID = 2;
+  string groupID = 3;
+  string clientMsgID = 4;
+  string serverMsgID = 5;
+  int32 senderPlatformID = 6;
+  string  senderNickname = 7;
+  string  senderFaceURL = 8;
+  int32   sessionType = 9;
+  int32 msgFrom = 10;
+  int32 contentType = 11;
+  bytes content = 12;
+  uint32 seq = 14;
+  int64 sendTime = 15;
+  int64 createTime = 16;
+  OfflinePushInfo offlinePushInfo = 17;
+  repeated string atUserIDList = 18;
+  map<string, bool> options = 19;
+}
+
+message OfflinePushInfo{
+  string title = 1;
+  string desc = 2;
+  string ex = 3;
+  string iOSPushSound = 4;
+  bool iOSBadgeCount = 5;
+}
+
+
+message PullMessageBySeqListReq{
+  string userID = 1;
+  repeated uint32 seqList = 2;
+}
+
+message PullMessageBySuperGroupSeqListReq {
+  string groupID = 1;
+  repeated uint32 seqList = 2;
+}
+
+message PullMessageBySeqListResp {
+  int32 errCode = 1;
+  string errMsg = 2;
+  repeated MsgData list = 3;
+}

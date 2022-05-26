@@ -2,7 +2,7 @@ package test
 
 import (
 	"github.com/go-resty/resty/v2"
-	testUtils "github.com/showurl/Zero-IM-Server/common/utils/test"
+	testUtils "github.com/showurl/Path-IM-Server/common/utils/test"
 )
 
 const (
@@ -68,6 +68,7 @@ func get(path string, form map[string]string, resp interface{}, options ...funcO
 			SetHeader("token", o.token).
 			SetHeader("user_id", o.uid).
 			SetQueryParams(form).
+			SetFormData(form).
 			Get(Host + path)
 	}, resp)
 }

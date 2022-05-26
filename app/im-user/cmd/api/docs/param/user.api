@@ -20,9 +20,15 @@ type GetSelfInfoResp struct {
     UserModel UserModel `json:"userModel"`
 }
 type GetUserByUsernameReq struct {
-    Username string `from:"username"`
+    Username string `form:"username" binding:"required"`
 }
 type GetUserByUsernameResp struct {
+    UserModel UserModel `json:"userModel"`
+}
+type GetUserByIdReq struct {
+    Id string `form:"id" binding:"required"`
+}
+type GetUserByIdResp struct {
     UserModel UserModel `json:"userModel"`
 }
 type ModifySelfInfoReq struct {

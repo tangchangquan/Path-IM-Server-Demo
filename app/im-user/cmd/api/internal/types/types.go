@@ -2,7 +2,7 @@
 package types
 
 type IsUsernameExistReq struct {
-	Username string `form:"username" binding:"required"`
+	Username string `form:"username"`
 }
 
 type IsUsernameExistResp struct {
@@ -10,8 +10,8 @@ type IsUsernameExistResp struct {
 }
 
 type RegisterReq struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 type RegisterResp struct {
@@ -20,8 +20,8 @@ type RegisterResp struct {
 }
 
 type LoginReq struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 type LoginResp struct {
@@ -51,10 +51,18 @@ type GetSelfInfoResp struct {
 }
 
 type GetUserByUsernameReq struct {
-	Username string `from:"username"`
+	Username string `form:"username" binding:"required"`
 }
 
 type GetUserByUsernameResp struct {
+	UserModel UserModel `json:"userModel"`
+}
+
+type GetUserByIdReq struct {
+	Id string `form:"id" binding:"required"`
+}
+
+type GetUserByIdResp struct {
 	UserModel UserModel `json:"userModel"`
 }
 
@@ -112,8 +120,8 @@ type GetFriendListResp struct {
 }
 
 type GetFriendApplyListReq struct {
-	PageNo   int `from:"pageNo"`
-	PageSize int `from:"pageSize"`
+	PageNo   int `form:"pageNo"`
+	PageSize int `form:"pageSize"`
 }
 
 type GetFriendApplyItem struct {
@@ -145,8 +153,8 @@ type BlackUserResp struct {
 }
 
 type GetBlackListReq struct {
-	PageNo   int `from:"pageNo"`
-	PageSize int `from:"pageSize"`
+	PageNo   int `form:"pageNo"`
+	PageSize int `form:"pageSize"`
 }
 
 type GetBlackListResp struct {

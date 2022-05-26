@@ -2,8 +2,8 @@ package repository
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/model"
-	"github.com/showurl/Zero-IM-Server/common/xcache/rc"
+	"github.com/showurl/Path-IM-Server/app/im-user/model"
+	"github.com/showurl/Path-IM-Server/common/xcache/rc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
 )

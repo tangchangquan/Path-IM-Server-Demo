@@ -1,7 +1,7 @@
 package xconf
 
 import (
-	"github.com/showurl/Zero-IM-Server/common/xenv"
+	"github.com/showurl/Path-IM-Server/common/xenv"
 	"github.com/zeromicro/go-zero/core/conf"
 	"os"
 )

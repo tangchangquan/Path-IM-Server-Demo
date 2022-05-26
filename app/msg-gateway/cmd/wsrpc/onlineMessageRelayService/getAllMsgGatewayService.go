@@ -3,7 +3,7 @@ package onlinemessagerelayservice
 import (
 	"context"
 	"fmt"
-	"github.com/showurl/Zero-IM-Server/common/xetcd"
+	"github.com/showurl/Path-IM-Server/common/xetcd"
 	"github.com/zeromicro/go-zero/core/discov"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/proc"

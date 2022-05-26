@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/types"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/types"
 	"testing"
 )
 

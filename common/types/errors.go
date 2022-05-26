@@ -2,7 +2,7 @@ package types
 
 import (
 	"fmt"
-	"github.com/showurl/Zero-IM-Server/common/xerr"
+	"github.com/showurl/Path-IM-Server/common/xerr"
 )
 
 var WSDataError = xerr.New(3001, "ws data error")

@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	imuser "github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/handler/imuser"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/svc"
+	imuser "github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/handler/imuser"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
@@ -39,6 +39,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodGet,
 					Path:    "/user/getinfobyusername",
 					Handler: imuser.GetUserByUsernameHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/user/getinfobyid",
+					Handler: imuser.GetUserByIdHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPut,

@@ -2,13 +2,14 @@ package logic
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
-	"github.com/showurl/Zero-IM-Server/app/im-user/model"
-	"github.com/showurl/Zero-IM-Server/common/xcache/global"
-	xormerr "github.com/showurl/Zero-IM-Server/common/xorm/err"
+	"fmt"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/repository"
+	"github.com/showurl/Path-IM-Server/app/im-user/model"
+	"github.com/showurl/Path-IM-Server/common/xcache/global"
+	xormerr "github.com/showurl/Path-IM-Server/common/xorm/err"
 
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,6 +31,9 @@ func NewGetUserByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUs
 }
 
 func (l *GetUserByIdLogic) GetUserById(in *pb.GetUserByIdReq) (*pb.GetUserResp, error) {
+	if in.UserId == "" {
+		return nil, fmt.Errorf("用户id不能为空")
+	}
 	user := &model.User{}
 	err := l.rep.DetailCache.FirstById(user, in.UserId)
 	if err != nil {

@@ -4,7 +4,6 @@ kind: ServiceAccount
 metadata:
   namespace: zeroim
   name: find-endpoints
-
 ---
 #创建角色对应操作
 apiVersion: rbac.authorization.k8s.io/v1
@@ -16,7 +15,6 @@ rules:
   - apiGroups: [""]
     resources: ["endpoints"]
     verbs: ["get","list","watch"]
-
 ---
 #给账号绑定角色
 apiVersion: rbac.authorization.k8s.io/v1

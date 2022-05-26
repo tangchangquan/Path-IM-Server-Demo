@@ -1,7 +1,7 @@
-# 1、克隆Zero-IM-Server
+# 1、克隆Path-IM-Server
 
 ```shell
-git clone https://github.com/showurl/Zero-IM-Server.git -b main --depth 1
+git clone https://github.com/showurl/Path-IM-Server.git -b main --depth 1
 ```
 
 # 2、搜索 todo
@@ -35,11 +35,11 @@ package repository
 
 import (
 	"github.com/go-redis/redis/v8"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Zero-IM-Server/common/xcache"
-	"github.com/showurl/Zero-IM-Server/common/xcache/dc"
-	"github.com/showurl/Zero-IM-Server/common/xcache/global"
-	"github.com/showurl/Zero-IM-Server/common/xorm"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Path-IM-Server/common/xcache"
+	"github.com/showurl/Path-IM-Server/common/xcache/dc"
+	"github.com/showurl/Path-IM-Server/common/xcache/global"
+	"github.com/showurl/Path-IM-Server/common/xorm"
 	"gorm.io/gorm"
 )
 
@@ -182,7 +182,7 @@ func (l *GetSingleConversationRecvMsgOptsLogic) GetSingleConversationRecvMsgOpts
 package rpc
 
 import (
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/imuserservice"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/imuserservice"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
@@ -254,14 +254,14 @@ package logic
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
-	"github.com/showurl/Zero-IM-Server/app/im-user/model"
-	"github.com/showurl/Zero-IM-Server/common/xcache/global"
-	"github.com/showurl/Zero-IM-Server/common/xcache/rc"
-	xormerr "github.com/showurl/Zero-IM-Server/common/xorm/err"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/repository"
+	"github.com/showurl/Path-IM-Server/app/im-user/model"
+	"github.com/showurl/Path-IM-Server/common/xcache/global"
+	"github.com/showurl/Path-IM-Server/common/xcache/rc"
+	xormerr "github.com/showurl/Path-IM-Server/common/xorm/err"
 
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -331,7 +331,7 @@ package rpc
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
 	"testing"
 )
 
@@ -411,7 +411,7 @@ package rpc
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
 	"testing"
 )
 
@@ -446,8 +446,8 @@ package repository
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/common/types"
-	timeUtils "github.com/showurl/Zero-IM-Server/common/utils/time"
+	"github.com/showurl/Path-IM-Server/common/types"
+	timeUtils "github.com/showurl/Path-IM-Server/common/utils/time"
 	"strconv"
 	"time"
 )
@@ -478,10 +478,10 @@ package logic
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
-	jwtUtils "github.com/showurl/Zero-IM-Server/common/utils/jwt"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/repository"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
+	jwtUtils "github.com/showurl/Path-IM-Server/common/utils/jwt"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

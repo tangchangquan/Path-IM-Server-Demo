@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/showurl/Zero-IM-Server/common/xconf"
+	"github.com/showurl/Path-IM-Server/common/xconf"
 
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/config"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/server"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/config"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/server"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/zrpc"

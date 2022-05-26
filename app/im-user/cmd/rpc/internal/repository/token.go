@@ -2,8 +2,8 @@ package repository
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/common/types"
-	timeUtils "github.com/showurl/Zero-IM-Server/common/utils/time"
+	"github.com/showurl/Path-IM-Server/common/types"
+	timeUtils "github.com/showurl/Path-IM-Server/common/utils/time"
 	"strconv"
 	"time"
 )

@@ -2,17 +2,17 @@ package logic
 
 import (
 	"context"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/repository"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/types"
-	"github.com/showurl/Zero-IM-Server/app/im-user/model"
-	chatpb "github.com/showurl/Zero-IM-Server/app/msg/cmd/rpc/pb"
-	timeUtils "github.com/showurl/Zero-IM-Server/common/utils/time"
-	"github.com/showurl/Zero-IM-Server/common/xorm"
-	"github.com/showurl/Zero-IM-Server/common/xorm/global"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/repository"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/types"
+	"github.com/showurl/Path-IM-Server/app/im-user/model"
+	chatpb "github.com/showurl/Path-IM-Server/app/msg/cmd/rpc/pb"
+	timeUtils "github.com/showurl/Path-IM-Server/common/utils/time"
+	"github.com/showurl/Path-IM-Server/common/xorm"
+	"github.com/showurl/Path-IM-Server/common/xorm/global"
 	"gorm.io/gorm"
 
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

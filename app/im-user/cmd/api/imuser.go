@@ -3,11 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/showurl/Zero-IM-Server/common/xconf"
+	"github.com/showurl/Path-IM-Server/common/xconf"
 
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/config"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/handler"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/svc"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/config"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/handler"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

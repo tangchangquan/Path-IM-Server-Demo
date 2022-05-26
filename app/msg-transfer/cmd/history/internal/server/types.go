@@ -1,15 +1,15 @@
 package server
 
 import (
-	"github.com/showurl/Zero-IM-Server/app/msg-transfer/cmd/history/internal/svc"
-	"github.com/showurl/Zero-IM-Server/common/xkafka"
+	"github.com/showurl/Path-IM-Server/app/msg-transfer/cmd/history/internal/svc"
+	"github.com/showurl/Path-IM-Server/common/xkafka"
 	"sync"
 )
 
 const OnlineTopicBusy = 1
 const OnlineTopicVacancy = 0
 
-type fcb func(msg []byte, msgKey string)
+type fcb func(msg []byte, msgKey string) error
 type Cmd2Value struct {
 	Cmd   int
 	Value interface{}

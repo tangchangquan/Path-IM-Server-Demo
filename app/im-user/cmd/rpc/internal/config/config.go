@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/showurl/Zero-IM-Server/common/xorm/global"
+	"github.com/showurl/Path-IM-Server/common/xorm/global"
 	"github.com/zeromicro/go-zero/core/discov"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/zrpc"

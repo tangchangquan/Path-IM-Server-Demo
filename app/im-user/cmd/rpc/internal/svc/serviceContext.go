@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/internal/config"
-	"github.com/showurl/Zero-IM-Server/app/msg/cmd/rpc/chat"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/config"
+	"github.com/showurl/Path-IM-Server/app/msg/cmd/rpc/chat"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 

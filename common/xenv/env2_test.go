@@ -1,8 +1,8 @@
 package xenv
 
 import (
-	"github.com/showurl/Zero-IM-Server/common/xkafka"
-	"github.com/showurl/Zero-IM-Server/common/xmgo/global"
+	"github.com/showurl/Path-IM-Server/common/xkafka"
+	"github.com/showurl/Path-IM-Server/common/xmgo/global"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"os"
 	"testing"

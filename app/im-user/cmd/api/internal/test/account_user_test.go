@@ -1,14 +1,14 @@
 package test
 
 import (
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/types"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/types"
 	"testing"
 )
 
 func TestRegister(t *testing.T) {
 	resp := &types.RegisterResp{}
 	post("/v1/white/account/register", &types.RegisterReq{
-		Username: "user17",
+		Username: "user37",
 		Password: "123456",
 	}, resp)
 	t.Log(resp.Token)
@@ -34,6 +34,29 @@ func TestLogin(t *testing.T) {
 func TestGetSelfInfoLogic(t *testing.T) {
 	resp := &types.IsUsernameExistResp{}
 	get("/v1/user/selfinfo", map[string]string{}, resp,
+		withToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVSUQiOiI2NTUzY2U1MWQ0MzEwMTMwY2JlNWEyYzI4NzY0YzIwMCIsIlBsYXRmb3JtIjoiSU9TIiwiZXhwIjo0ODA2NzM4MzY0LCJuYmYiOjE2NTMxMzgzNjQsImlhdCI6MTY1MzEzODM2NH0.Jye6_oySFM9pDDuc7s3LczLTLuxJrJgbO5d9zTXbL_E"),
+		withUid("21f5ca36a0c77ed38dabddafa7d39445"),
+	)
+	t.Logf("%+v", resp)
+}
+
+func TestGetUserInfoByIdLogic(t *testing.T) {
+	resp := &types.GetUserByIdResp{}
+	get("/v1/user/getinfobyid", map[string]string{
+		"id": "26338dd192cccc5ec7c656bdd588ef67",
+		//"Id": "",
+	}, resp,
+		withToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVSUQiOiI2NTUzY2U1MWQ0MzEwMTMwY2JlNWEyYzI4NzY0YzIwMCIsIlBsYXRmb3JtIjoiSU9TIiwiZXhwIjo0ODA2NzM4MzY0LCJuYmYiOjE2NTMxMzgzNjQsImlhdCI6MTY1MzEzODM2NH0.Jye6_oySFM9pDDuc7s3LczLTLuxJrJgbO5d9zTXbL_E"),
+		withUid("21f5ca36a0c77ed38dabddafa7d39445"),
+	)
+	t.Logf("%+v", resp)
+}
+func TestGetUserInfoByUsernameLogic(t *testing.T) {
+	resp := &types.GetUserByIdResp{}
+	get("/v1/user/getinfobyusername", map[string]string{
+		"username": "21f5ca36a0c77ed38dabddafa7d39445",
+		//"Id": "",
+	}, resp,
 		withToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVSUQiOiI2NTUzY2U1MWQ0MzEwMTMwY2JlNWEyYzI4NzY0YzIwMCIsIlBsYXRmb3JtIjoiSU9TIiwiZXhwIjo0ODA2NzM4MzY0LCJuYmYiOjE2NTMxMzgzNjQsImlhdCI6MTY1MzEzODM2NH0.Jye6_oySFM9pDDuc7s3LczLTLuxJrJgbO5d9zTXbL_E"),
 		withUid("21f5ca36a0c77ed38dabddafa7d39445"),
 	)

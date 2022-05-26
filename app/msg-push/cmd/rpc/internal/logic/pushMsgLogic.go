@@ -3,18 +3,18 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	imuserpb "github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
-	onlinemessagerelayservice "github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/onlineMessageRelayService"
-	gatewaypb "github.com/showurl/Zero-IM-Server/app/msg-gateway/cmd/wsrpc/pb"
-	"github.com/showurl/Zero-IM-Server/app/msg-push/cmd/rpc/internal/svc"
-	"github.com/showurl/Zero-IM-Server/app/msg-push/cmd/rpc/pb"
-	chatpb "github.com/showurl/Zero-IM-Server/app/msg/cmd/rpc/pb"
-	"github.com/showurl/Zero-IM-Server/common/fastjson"
-	"github.com/showurl/Zero-IM-Server/common/types"
-	"github.com/showurl/Zero-IM-Server/common/utils"
-	numUtils "github.com/showurl/Zero-IM-Server/common/utils/num"
-	strUtils "github.com/showurl/Zero-IM-Server/common/utils/str"
-	"github.com/showurl/Zero-IM-Server/common/xtrace"
+	imuserpb "github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
+	onlinemessagerelayservice "github.com/showurl/Path-IM-Server/app/msg-gateway/cmd/wsrpc/onlineMessageRelayService"
+	gatewaypb "github.com/showurl/Path-IM-Server/app/msg-gateway/cmd/wsrpc/pb"
+	"github.com/showurl/Path-IM-Server/app/msg-push/cmd/rpc/internal/svc"
+	"github.com/showurl/Path-IM-Server/app/msg-push/cmd/rpc/pb"
+	chatpb "github.com/showurl/Path-IM-Server/app/msg/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/common/fastjson"
+	"github.com/showurl/Path-IM-Server/common/types"
+	"github.com/showurl/Path-IM-Server/common/utils"
+	numUtils "github.com/showurl/Path-IM-Server/common/utils/num"
+	strUtils "github.com/showurl/Path-IM-Server/common/utils/str"
+	"github.com/showurl/Path-IM-Server/common/xtrace"
 	"go.opentelemetry.io/otel/attribute"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -257,6 +257,11 @@ func (l *PushMsgLogic) pushSuperGroupMsg(
 						})
 						if err != nil {
 							l.Errorf("PushMsgToUser error: %v", err)
+							return
+						}
+						if resp == nil || resp.Resp == nil {
+							l.Errorf("PushMsgToUser error: resp == nil")
+							return
 						}
 						for _, res := range resp.Resp {
 							// 是否全部平台都失败了

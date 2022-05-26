@@ -4,7 +4,7 @@ import "param/user.api"
 
 // 用户名是否存在
 type IsUsernameExistReq struct {
-    Username string `form:"username" binding:"required"`
+    Username string `form:"username"`
 }
 type IsUsernameExistResp struct {
     Exist bool `json:"exist"`
@@ -12,8 +12,8 @@ type IsUsernameExistResp struct {
 
 // 注册用户
 type RegisterReq struct {
-    Username string `json:"username" binding:"required"`
-    Password string `json:"password" binding:"required"`
+    Username string `json:"username"`
+    Password string `json:"password"`
 }
 type RegisterResp {
     UserModel UserModel `json:"userModel"`
@@ -22,8 +22,8 @@ type RegisterResp {
 
 // 登录
 type LoginReq struct {
-    Username string `json:"username" binding:"required"`
-    Password string `json:"password" binding:"required"`
+    Username string `json:"username"`
+    Password string `json:"password"`
 }
 type LoginResp {
     UserModel UserModel `json:"userModel"`

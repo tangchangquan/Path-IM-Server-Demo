@@ -3,12 +3,12 @@ package imuser
 import (
 	"context"
 	"fmt"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/rpc/pb"
-	"github.com/showurl/Zero-IM-Server/common/ctxdata"
-	"github.com/showurl/Zero-IM-Server/common/utils/encrypt"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/showurl/Path-IM-Server/common/ctxdata"
+	"github.com/showurl/Path-IM-Server/common/utils/encrypt"
 
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/svc"
-	"github.com/showurl/Zero-IM-Server/app/im-user/cmd/api/internal/types"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/svc"
+	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
