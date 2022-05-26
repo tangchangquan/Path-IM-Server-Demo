@@ -52,4 +52,4 @@ func (g *GroupChat) TableName() string {
 ![img.png](img.png)
 
 ## jaeger
-![img.png](https://raw.githubusercontent.com/Path-IM/Path-IM-Docs/main/images/20220521/jaeger.png)
+![img.png](https://raw.githubusercontent.com/Path-IM/Path-IM-Docs/main/images/20220526/jaeger.png)
