@@ -13,3 +13,4 @@
 - [x] 完成 api 文档 编写 [第六天](docs/api.md)
 - [x] 完成 消息持久化存储 文档 编写 [第十天](docs/persistent.md)
 - [x] 支持 cassandra 离线消息存储 [第十二天](docs/cassandra.md)
+- [x] go-zero periodlimit 用户发送消息限流 [第十二天](docs/periodlimit.md)
