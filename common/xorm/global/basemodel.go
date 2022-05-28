@@ -1,7 +1,7 @@
 package global
 
 import (
-	envUtils "github.com/showurl/Path-IM-Server/common/utils/env"
+	envUtils "github.com/Path-IM/Path-IM-Server-Demo/common/utils/env"
 	"gorm.io/gorm"
 )
 

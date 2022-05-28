@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	imuser "github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/handler/imuser"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/svc"
+	imuser "github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/handler/imuser"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

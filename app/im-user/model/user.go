@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/showurl/Path-IM-Server/common/utils/encrypt"
-	"github.com/showurl/Path-IM-Server/common/xorm/global"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/utils/encrypt"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xorm/global"
 	"gorm.io/gorm"
 	"reflect"
 	"strings"

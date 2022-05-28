@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/repository"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
-	jwtUtils "github.com/showurl/Path-IM-Server/common/utils/jwt"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/repository"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/svc"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/pb"
+	jwtUtils "github.com/Path-IM/Path-IM-Server-Demo/common/utils/jwt"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"

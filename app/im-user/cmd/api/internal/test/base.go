@@ -1,8 +1,8 @@
 package test
 
 import (
+	testUtils "github.com/Path-IM/Path-IM-Server-Demo/common/utils/test"
 	"github.com/go-resty/resty/v2"
-	testUtils "github.com/showurl/Path-IM-Server/common/utils/test"
 )
 
 const (

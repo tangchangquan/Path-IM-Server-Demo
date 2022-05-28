@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"github.com/showurl/Path-IM-Server/app/msg-transfer/model"
-	chatpb "github.com/showurl/Path-IM-Server/app/msg/cmd/rpc/pb"
-	xormerr "github.com/showurl/Path-IM-Server/common/xorm/err"
-	"github.com/showurl/Path-IM-Server/common/xtrace"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/msg-transfer/model"
+	chatpb "github.com/Path-IM/Path-IM-Server-Demo/app/msg/cmd/rpc/pb"
+	xormerr "github.com/Path-IM/Path-IM-Server-Demo/common/xorm/err"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xtrace"
 )
 
 func (l *MsgTransferPersistentOnlineLogic) saveSingleChat(ctx context.Context, key string, c *chatpb.MsgDataToMQ) error {
@@ -17,7 +17,7 @@ func (l *MsgTransferPersistentOnlineLogic) saveSingleChat(ctx context.Context, k
 		// 自己给自己发消息 不存储
 		return nil
 	}
-	chat := &model.SingleChat{
+	chat := &model.CassSingleChat{
 		ServerMsgID:      c.MsgData.ServerMsgID,
 		SendID:           c.MsgData.SendID,
 		RecvID:           c.MsgData.RecvID,

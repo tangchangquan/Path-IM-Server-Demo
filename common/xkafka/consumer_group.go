@@ -3,6 +3,7 @@ package xkafka
 import (
 	"context"
 	"github.com/Shopify/sarama"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type MConsumerGroup struct {
@@ -30,6 +31,7 @@ func NewMConsumerGroup(consumerConfig *MConsumerGroupConfig, topics, addr []stri
 	if err != nil {
 		panic(err.Error())
 	}
+	logx.Info("consumer group:%s, topics:%v, addr:%v", groupID, topics, addr)
 	return &MConsumerGroup{
 		consumerGroup,
 		groupID,

@@ -7,11 +7,11 @@ package middleware
 
 import (
 	"context"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/imuserservice"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
-	"github.com/showurl/Path-IM-Server/common/ctxdata"
-	"github.com/showurl/Path-IM-Server/common/xerr"
-	"github.com/showurl/Path-IM-Server/common/xhttp"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/imuserservice"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/pb"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/ctxdata"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xerr"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xhttp"
 	"github.com/zeromicro/go-zero/core/logx"
 	"net/http"
 	"strings"

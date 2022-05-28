@@ -1,9 +1,9 @@
 package rpc
 
 import (
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/imuserservice"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/relationservice"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/userservice"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/imuserservice"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/relationservice"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/userservice"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 

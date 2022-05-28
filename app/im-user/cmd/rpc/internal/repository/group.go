@@ -2,11 +2,11 @@ package repository
 
 import (
 	"context"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/types"
-	"github.com/showurl/Path-IM-Server/app/im-user/model"
-	chatpb "github.com/showurl/Path-IM-Server/app/msg/cmd/rpc/pb"
-	"github.com/showurl/Path-IM-Server/common/xorm"
-	xormerr "github.com/showurl/Path-IM-Server/common/xorm/err"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/types"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/model"
+	chatpb "github.com/Path-IM/Path-IM-Server-Demo/app/msg/cmd/rpc/pb"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xorm"
+	xormerr "github.com/Path-IM/Path-IM-Server-Demo/common/xorm/err"
 	"gorm.io/gorm"
 )
 

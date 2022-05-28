@@ -1,11 +1,11 @@
 package svc
 
 import (
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/config"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/middleware"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/imuserservice"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/relationservice"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/userservice"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/config"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/middleware"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/imuserservice"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/relationservice"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/userservice"
 	"github.com/zeromicro/go-zero/rest"
 	"github.com/zeromicro/go-zero/zrpc"
 )

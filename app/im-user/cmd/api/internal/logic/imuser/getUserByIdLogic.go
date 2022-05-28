@@ -3,9 +3,9 @@ package imuser
 import (
 	"context"
 	"fmt"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/svc"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/types"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/svc"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/types"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

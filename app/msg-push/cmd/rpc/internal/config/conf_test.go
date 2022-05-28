@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/showurl/Path-IM-Server/common/xenv"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xenv"
 	"testing"
 )
 

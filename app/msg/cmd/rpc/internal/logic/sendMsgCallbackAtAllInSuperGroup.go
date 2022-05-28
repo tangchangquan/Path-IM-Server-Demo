@@ -1,9 +1,9 @@
 package logic
 
 import (
-	msgcallbackpb "github.com/showurl/Path-IM-Server/app/msg-callback/cmd/rpc/pb"
-	chatpb "github.com/showurl/Path-IM-Server/app/msg/cmd/rpc/pb"
-	"github.com/showurl/Path-IM-Server/common/types"
+	msgcallbackpb "github.com/Path-IM/Path-IM-Server-Demo/app/msg-callback/cmd/rpc/pb"
+	chatpb "github.com/Path-IM/Path-IM-Server-Demo/app/msg/cmd/rpc/pb"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/types"
 )
 
 func (l *SendMsgLogic) callbackAtAllInSuperGroup(msg *chatpb.SendMsgReq) (canSend bool, err error) {

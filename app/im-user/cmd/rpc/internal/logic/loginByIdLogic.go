@@ -2,13 +2,13 @@ package logic
 
 import (
 	"context"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/repository"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/svc"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/pb"
+	onlinemessagerelayservice "github.com/Path-IM/Path-IM-Server-Demo/app/msg-gateway/cmd/wsrpc/onlineMessageRelayService"
+	gatewaypb "github.com/Path-IM/Path-IM-Server-Demo/app/msg-gateway/cmd/wsrpc/pb"
+	jwtUtils "github.com/Path-IM/Path-IM-Server-Demo/common/utils/jwt"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/repository"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
-	onlinemessagerelayservice "github.com/showurl/Path-IM-Server/app/msg-gateway/cmd/wsrpc/onlineMessageRelayService"
-	gatewaypb "github.com/showurl/Path-IM-Server/app/msg-gateway/cmd/wsrpc/pb"
-	jwtUtils "github.com/showurl/Path-IM-Server/common/utils/jwt"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

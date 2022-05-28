@@ -2,8 +2,8 @@ package repository
 
 import (
 	"context"
-	"github.com/showurl/Path-IM-Server/common/types"
-	timeUtils "github.com/showurl/Path-IM-Server/common/utils/time"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/types"
+	timeUtils "github.com/Path-IM/Path-IM-Server-Demo/common/utils/time"
 	"strconv"
 	"time"
 )

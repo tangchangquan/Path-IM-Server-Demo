@@ -51,10 +51,12 @@ spec:
             value: msg-rpc
           - name: ZEROIM_RPCSERVERCONF_SERVICECONF_TELEMETRY__NAME
             value: msg-rpc
+          - name: ZEROIM_CASSANDRA_CASSANDRACONFIG__CONSISTENCY
+            value: QUORUM
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/msg-rpc:20220524105241
+        image: ccr.ccs.tencentyun.com/zeroim/msg-rpc:20220528185948
         lifecycle:
           preStop:
             exec:

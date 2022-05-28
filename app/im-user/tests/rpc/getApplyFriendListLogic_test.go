@@ -1,7 +1,7 @@
 package rpc
 
 import (
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/pb"
 	"testing"
 )
 

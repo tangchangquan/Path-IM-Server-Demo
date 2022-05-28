@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/showurl/Path-IM-Server/common/xkafka"
-	"github.com/showurl/Path-IM-Server/common/xmgo/global"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xcql"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xkafka"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xmgo/global"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/zrpc"
 )
@@ -16,7 +17,10 @@ type Config struct {
 	MsgCallbackRpc zrpc.RpcClientConf
 	RedisConfig    RedisConfig
 	Mongo          MongoConfig
+	Cassandra      CassandraConfig
+	HistoryDBType  string // mongo or cassandra
 }
+
 type RedisConfig struct {
 	Conf redis.RedisConf
 	DB   int
@@ -49,4 +53,10 @@ type MongoConfig struct {
 	DBTimeout                       int
 	SingleChatMsgCollectionName     string
 	SuperGroupChatMsgCollectionName string
+}
+type CassandraConfig struct {
+	xcql.CassandraConfig
+	DBDatabase                 string
+	SingleChatMsgTableName     string
+	SuperGroupChatMsgTableName string
 }

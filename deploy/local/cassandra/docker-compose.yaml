@@ -1,0 +1,34 @@
+version: '2'
+services:
+  cassandra:
+    image: docker.io/bitnami/cassandra:4.0
+    ports:
+      - 9042:9042
+    environment:
+      - CASSANDRA_SEEDS=cassandra,cassandra2,cassandra3
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=cassandra
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=200M
+  cassandra2:
+    image: docker.io/bitnami/cassandra:4.0
+    ports:
+      - 9043:9042
+    environment:
+      - CASSANDRA_SEEDS=cassandra,cassandra2,cassandra3
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_PASSWORD=cassandra
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=200M
+
+  cassandra3:
+    image: docker.io/bitnami/cassandra:4.0
+    ports:
+      - 9044:9042
+    environment:
+      - CASSANDRA_SEEDS=cassandra,cassandra2,cassandra3
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_PASSWORD=cassandra
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=200M

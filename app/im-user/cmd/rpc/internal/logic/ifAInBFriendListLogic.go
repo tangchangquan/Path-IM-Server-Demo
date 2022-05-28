@@ -2,12 +2,12 @@ package logic
 
 import (
 	"context"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/repository"
-	"github.com/showurl/Path-IM-Server/app/im-user/model"
-	xormerr "github.com/showurl/Path-IM-Server/common/xorm/err"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/repository"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/model"
+	xormerr "github.com/Path-IM/Path-IM-Server-Demo/common/xorm/err"
 
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/pb"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/svc"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

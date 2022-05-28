@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"github.com/showurl/Path-IM-Server/app/msg-transfer/model"
-	chatpb "github.com/showurl/Path-IM-Server/app/msg/cmd/rpc/pb"
-	xormerr "github.com/showurl/Path-IM-Server/common/xorm/err"
-	"github.com/showurl/Path-IM-Server/common/xtrace"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/msg-transfer/model"
+	chatpb "github.com/Path-IM/Path-IM-Server-Demo/app/msg/cmd/rpc/pb"
+	xormerr "github.com/Path-IM/Path-IM-Server-Demo/common/xorm/err"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xtrace"
 )
 
 func (l *MsgTransferPersistentOnlineLogic) saveSuperGroupChat(ctx context.Context, key string, c *chatpb.MsgDataToMQ) error {

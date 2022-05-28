@@ -1,4 +1,4 @@
-module github.com/showurl/Path-IM-Server
+module github.com/Path-IM/Path-IM-Server-Demo
 
 go 1.18
 
@@ -9,6 +9,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/gocql/gocql v1.1.0
 	github.com/golang-jwt/jwt/v4 v4.2.0
 	github.com/golang/protobuf v1.5.2
 	github.com/gorilla/websocket v1.5.0
@@ -25,6 +26,8 @@ require (
 	google.golang.org/protobuf v1.28.0
 	gorm.io/driver/mysql v1.3.3
 	gorm.io/gorm v1.23.5
+	k8s.io/apimachinery v0.20.12
+	k8s.io/client-go v0.20.12
 )
 
 require (
@@ -50,6 +53,7 @@ require (
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/gnostic v0.4.1 // indirect
+	github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-uuid v1.0.2 // indirect
@@ -104,8 +108,6 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	k8s.io/api v0.20.12 // indirect
-	k8s.io/apimachinery v0.20.12 // indirect
-	k8s.io/client-go v0.20.12 // indirect
 	k8s.io/klog/v2 v2.40.1 // indirect
 	k8s.io/utils v0.0.0-20201110183641-67b214c5f920 // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.1.2 // indirect

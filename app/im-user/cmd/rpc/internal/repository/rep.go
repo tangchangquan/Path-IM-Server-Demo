@@ -1,14 +1,14 @@
 package repository
 
 import (
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/svc"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/model"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xcache"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xcache/dc"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xcache/global"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xcache/rc"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xorm"
 	"github.com/go-redis/redis/v8"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/rpc/internal/svc"
-	"github.com/showurl/Path-IM-Server/app/im-user/model"
-	"github.com/showurl/Path-IM-Server/common/xcache"
-	"github.com/showurl/Path-IM-Server/common/xcache/dc"
-	"github.com/showurl/Path-IM-Server/common/xcache/global"
-	"github.com/showurl/Path-IM-Server/common/xcache/rc"
-	"github.com/showurl/Path-IM-Server/common/xorm"
 	"gorm.io/gorm"
 )
 

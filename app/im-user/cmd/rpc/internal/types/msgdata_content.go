@@ -2,7 +2,7 @@ package types
 
 import (
 	"encoding/json"
-	"github.com/showurl/Path-IM-Server/common/types"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/types"
 )
 
 const (

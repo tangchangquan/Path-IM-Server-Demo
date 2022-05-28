@@ -1,14 +1,14 @@
 package test
 
 import (
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/types"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/types"
 	"testing"
 )
 
 func TestRegister(t *testing.T) {
 	resp := &types.RegisterResp{}
 	post("/v1/white/account/register", &types.RegisterReq{
-		Username: "user37",
+		Username: "user50",
 		Password: "123456",
 	}, resp)
 	t.Log(resp.Token)

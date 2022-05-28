@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github.com/showurl/Path-IM-Server/app/msg-transfer/cmd/persistent/internal/svc"
-	"github.com/showurl/Path-IM-Server/common/xorm"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/msg-transfer/cmd/persistent/internal/svc"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xorm"
 	"gorm.io/gorm"
 )
 

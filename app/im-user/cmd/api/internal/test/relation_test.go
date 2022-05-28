@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/types"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/types"
 	"testing"
 )
 

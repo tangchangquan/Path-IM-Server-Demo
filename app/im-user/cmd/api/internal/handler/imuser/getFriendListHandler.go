@@ -3,10 +3,10 @@ package imuser
 import (
 	"net/http"
 
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/logic/imuser"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/svc"
-	"github.com/showurl/Path-IM-Server/app/im-user/cmd/api/internal/types"
-	"github.com/showurl/Path-IM-Server/common/xhttp"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/logic/imuser"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/svc"
+	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/api/internal/types"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xhttp"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

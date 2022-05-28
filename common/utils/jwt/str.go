@@ -1,8 +1,8 @@
 package jwtUtils
 
 import (
+	"github.com/Path-IM/Path-IM-Server-Demo/common/types"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/showurl/Path-IM-Server/common/types"
 	"strings"
 	"time"
 )

@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/showurl/Path-IM-Server/common/xkafka"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xkafka"
 	"github.com/zeromicro/go-zero/core/discov"
 	"github.com/zeromicro/go-zero/zrpc"
 )

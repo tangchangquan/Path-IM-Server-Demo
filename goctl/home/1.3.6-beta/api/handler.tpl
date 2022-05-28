@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"github.com/showurl/Path-IM-Server/common/xhttp"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xhttp"
 	{{.ImportPackages}}
 )
 
