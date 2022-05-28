@@ -16,8 +16,8 @@ message MsgData {
   int32 contentType = 11;
   bytes content = 12;
   uint32 seq = 14;
-  int64 sendTime = 15;
-  int64 createTime = 16;
+  int64 serverTime = 15;
+  int64 clientTime = 16;
   OfflinePushInfo offlinePushInfo = 17;
   repeated string atUserIDList = 18;
   map<string, bool> options = 19;
@@ -46,4 +46,18 @@ message PullMessageBySeqListResp {
   int32 errCode = 1;
   string errMsg = 2;
   repeated MsgData list = 3;
+}
+
+message SendMsgReq {
+  string token = 1;
+  string operationID = 2;
+  MsgData msgData = 3;
+}
+
+message SendMsgResp {
+  int32 errCode = 1;
+  string errMsg = 2;
+  string serverMsgID = 3;
+  string clientMsgID = 4;
+  int64  serverTime = 5;
 }

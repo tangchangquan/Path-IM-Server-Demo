@@ -8,7 +8,7 @@ import (
 func TestRegister(t *testing.T) {
 	resp := &types.RegisterResp{}
 	post("/v1/white/account/register", &types.RegisterReq{
-		Username: "user50",
+		Username: "user52",
 		Password: "123456",
 	}, resp)
 	t.Log(resp.Token)

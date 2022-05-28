@@ -50,7 +50,7 @@ spec:
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/msgtransfer-history-cassandra:20220528184807
+        image: ccr.ccs.tencentyun.com/zeroim/msgtransfer-history-cassandra:20220528232450
         lifecycle:
           preStop:
             exec:

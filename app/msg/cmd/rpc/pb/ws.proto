@@ -119,21 +119,21 @@ message Department {
   uint32 createTime = 7;
   uint32 subDepartmentNum = 8;
   uint32 memberNum = 9;
-  string ex        = 10;
+  string ex = 10;
 }
 
 message OrganizationUser  {
-  string userID      = 1;
-  string  nickname    = 2;
+  string userID = 1;
+  string  nickname = 2;
   string   englishName = 3;
-  string  faceURL    = 4;
-  int32   gender     = 5;
-  string   mobile      = 6;
-  string telephone   = 7;
-  uint32 birth     = 8;
-  string  email    = 9;
+  string  faceURL = 4;
+  int32   gender = 5;
+  string   mobile = 6;
+  string telephone = 7;
+  uint32 birth = 8;
+  string  email = 9;
   uint32   createTime = 10;
-  string ex      = 11;
+  string ex = 11;
 }
 
 message DepartmentMember {
@@ -143,7 +143,7 @@ message DepartmentMember {
   string position = 4;
   int32 leader = 5;
   int32 status = 6;
-  string ex     = 7;
+  string ex = 7;
 }
 
 
@@ -171,7 +171,7 @@ message PullMessageBySeqListReq{
 message UserSendMsgResp {
   string serverMsgID = 1;
   string clientMsgID = 2;
-  int64  sendTime = 3;
+  int64  serverTime = 3;
 
 }
 message MsgData {
@@ -188,8 +188,8 @@ message MsgData {
   int32 contentType = 11;
   bytes content = 12;
   uint32 seq = 14;
-  int64 sendTime = 15;
-  int64 createTime = 16;
+  int64 serverTime = 15;
+  int64 clientTime = 16;
   OfflinePushInfo offlinePushInfo = 17;
   repeated string atUserIDList = 18;
   map<string, bool> options = 19;
@@ -441,7 +441,7 @@ message ResponsePagination {
 message SignalReq {
   oneof payload {
     SignalInviteReq invite = 1;
-    SignalInviteInGroupReq inviteInGroup= 2;
+    SignalInviteInGroupReq inviteInGroup = 2;
     SignalCancelReq  cancel = 3;
     SignalAcceptReq accept = 4;
     SignalHungUpReq hungUp = 5;
@@ -452,7 +452,7 @@ message SignalReq {
 message SignalResp {
   oneof payload {
     SignalInviteReply invite = 1;
-    SignalInviteInGroupReply inviteInGroup= 2;
+    SignalInviteInGroupReply inviteInGroup = 2;
     SignalCancelReply  cancel = 3;
     SignalAcceptReply accept = 4;
     SignalHungUpReply hungUp = 5;
@@ -481,7 +481,7 @@ message ParticipantMetaData{
 message SignalInviteReq {
   string opUserID = 1;
   InvitationInfo invitation = 2;
-  OfflinePushInfo offlinePushInfo  = 3;
+  OfflinePushInfo offlinePushInfo = 3;
   ParticipantMetaData participant = 4;
 
 }
@@ -495,7 +495,7 @@ message SignalInviteReply {
 message SignalInviteInGroupReq {
   string opUserID = 1;
   InvitationInfo invitation = 2;
-  OfflinePushInfo offlinePushInfo  = 3;
+  OfflinePushInfo offlinePushInfo = 3;
   ParticipantMetaData participant = 4;
 }
 
@@ -508,7 +508,7 @@ message SignalInviteInGroupReply {
 message SignalCancelReq {
   string opUserID = 1;
   InvitationInfo invitation = 2;
-  OfflinePushInfo offlinePushInfo  = 3;
+  OfflinePushInfo offlinePushInfo = 3;
   ParticipantMetaData participant = 4;
 }
 
@@ -519,7 +519,7 @@ message SignalCancelReply {
 message SignalAcceptReq {
   string opUserID = 1;
   InvitationInfo invitation = 2;
-  OfflinePushInfo offlinePushInfo  = 3;
+  OfflinePushInfo offlinePushInfo = 3;
   ParticipantMetaData participant = 4;
   int32 opUserPlatformID = 5;
 }
@@ -533,7 +533,7 @@ message SignalAcceptReply {
 message SignalHungUpReq {
   string opUserID = 1;
   InvitationInfo invitation = 2;
-  OfflinePushInfo offlinePushInfo  = 3;
+  OfflinePushInfo offlinePushInfo = 3;
 }
 
 message SignalHungUpReply {
@@ -544,7 +544,7 @@ message SignalHungUpReply {
 message SignalRejectReq {
   string opUserID = 1;
   InvitationInfo invitation = 2;
-  OfflinePushInfo offlinePushInfo  = 3;
+  OfflinePushInfo offlinePushInfo = 3;
   ParticipantMetaData participant = 4;
   int32 opUserPlatformID = 5;
 }

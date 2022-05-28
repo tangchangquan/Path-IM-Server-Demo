@@ -25,8 +25,8 @@ class MsgData extends $pb.GeneratedMessage {
     ..a<$core.int>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'contentType', $pb.PbFieldType.O3, protoName: 'contentType')
     ..a<$core.List<$core.int>>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', $pb.PbFieldType.OY)
     ..a<$core.int>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'seq', $pb.PbFieldType.OU3)
-    ..aInt64(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sendTime', protoName: 'sendTime')
-    ..aInt64(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createTime', protoName: 'createTime')
+    ..aInt64(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverTime', protoName: 'serverTime')
+    ..aInt64(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'clientTime', protoName: 'clientTime')
     ..aOM<OfflinePushInfo>(17, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offlinePushInfo', protoName: 'offlinePushInfo', subBuilder: OfflinePushInfo.create)
     ..pPS(18, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'atUserIDList', protoName: 'atUserIDList')
     ..m<$core.String, $core.bool>(19, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'options', entryClassName: 'MsgData.OptionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OB, packageName: const $pb.PackageName('pb'))
@@ -48,8 +48,8 @@ class MsgData extends $pb.GeneratedMessage {
     $core.int? contentType,
     $core.List<$core.int>? content,
     $core.int? seq,
-    $fixnum.Int64? sendTime,
-    $fixnum.Int64? createTime,
+    $fixnum.Int64? serverTime,
+    $fixnum.Int64? clientTime,
     OfflinePushInfo? offlinePushInfo,
     $core.Iterable<$core.String>? atUserIDList,
     $core.Map<$core.String, $core.bool>? options,
@@ -94,11 +94,11 @@ class MsgData extends $pb.GeneratedMessage {
     if (seq != null) {
       _result.seq = seq;
     }
-    if (sendTime != null) {
-      _result.sendTime = sendTime;
+    if (serverTime != null) {
+      _result.serverTime = serverTime;
     }
-    if (createTime != null) {
-      _result.createTime = createTime;
+    if (clientTime != null) {
+      _result.clientTime = clientTime;
     }
     if (offlinePushInfo != null) {
       _result.offlinePushInfo = offlinePushInfo;
@@ -250,22 +250,22 @@ class MsgData extends $pb.GeneratedMessage {
   void clearSeq() => clearField(14);
 
   @$pb.TagNumber(15)
-  $fixnum.Int64 get sendTime => $_getI64(13);
+  $fixnum.Int64 get serverTime => $_getI64(13);
   @$pb.TagNumber(15)
-  set sendTime($fixnum.Int64 v) { $_setInt64(13, v); }
+  set serverTime($fixnum.Int64 v) { $_setInt64(13, v); }
   @$pb.TagNumber(15)
-  $core.bool hasSendTime() => $_has(13);
+  $core.bool hasServerTime() => $_has(13);
   @$pb.TagNumber(15)
-  void clearSendTime() => clearField(15);
+  void clearServerTime() => clearField(15);
 
   @$pb.TagNumber(16)
-  $fixnum.Int64 get createTime => $_getI64(14);
+  $fixnum.Int64 get clientTime => $_getI64(14);
   @$pb.TagNumber(16)
-  set createTime($fixnum.Int64 v) { $_setInt64(14, v); }
+  set clientTime($fixnum.Int64 v) { $_setInt64(14, v); }
   @$pb.TagNumber(16)
-  $core.bool hasCreateTime() => $_has(14);
+  $core.bool hasClientTime() => $_has(14);
   @$pb.TagNumber(16)
-  void clearCreateTime() => clearField(16);
+  void clearClientTime() => clearField(16);
 
   @$pb.TagNumber(17)
   OfflinePushInfo get offlinePushInfo => $_getN(15);
@@ -565,5 +565,185 @@ class PullMessageBySeqListResp extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(3)
   $core.List<MsgData> get list => $_getList(2);
+}
+
+class SendMsgReq extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SendMsgReq', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'pb'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'operationID', protoName: 'operationID')
+    ..aOM<MsgData>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'msgData', protoName: 'msgData', subBuilder: MsgData.create)
+    ..hasRequiredFields = false
+  ;
+
+  SendMsgReq._() : super();
+  factory SendMsgReq({
+    $core.String? token,
+    $core.String? operationID,
+    MsgData? msgData,
+  }) {
+    final _result = create();
+    if (token != null) {
+      _result.token = token;
+    }
+    if (operationID != null) {
+      _result.operationID = operationID;
+    }
+    if (msgData != null) {
+      _result.msgData = msgData;
+    }
+    return _result;
+  }
+  factory SendMsgReq.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SendMsgReq.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SendMsgReq clone() => SendMsgReq()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SendMsgReq copyWith(void Function(SendMsgReq) updates) => super.copyWith((message) => updates(message as SendMsgReq)) as SendMsgReq; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SendMsgReq create() => SendMsgReq._();
+  SendMsgReq createEmptyInstance() => create();
+  static $pb.PbList<SendMsgReq> createRepeated() => $pb.PbList<SendMsgReq>();
+  @$core.pragma('dart2js:noInline')
+  static SendMsgReq getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendMsgReq>(create);
+  static SendMsgReq? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get token => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set token($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearToken() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get operationID => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set operationID($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasOperationID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearOperationID() => clearField(2);
+
+  @$pb.TagNumber(3)
+  MsgData get msgData => $_getN(2);
+  @$pb.TagNumber(3)
+  set msgData(MsgData v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasMsgData() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMsgData() => clearField(3);
+  @$pb.TagNumber(3)
+  MsgData ensureMsgData() => $_ensure(2);
+}
+
+class SendMsgResp extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SendMsgResp', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'pb'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errCode', $pb.PbFieldType.O3, protoName: 'errCode')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errMsg', protoName: 'errMsg')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverMsgID', protoName: 'serverMsgID')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'clientMsgID', protoName: 'clientMsgID')
+    ..aInt64(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverTime', protoName: 'serverTime')
+    ..hasRequiredFields = false
+  ;
+
+  SendMsgResp._() : super();
+  factory SendMsgResp({
+    $core.int? errCode,
+    $core.String? errMsg,
+    $core.String? serverMsgID,
+    $core.String? clientMsgID,
+    $fixnum.Int64? serverTime,
+  }) {
+    final _result = create();
+    if (errCode != null) {
+      _result.errCode = errCode;
+    }
+    if (errMsg != null) {
+      _result.errMsg = errMsg;
+    }
+    if (serverMsgID != null) {
+      _result.serverMsgID = serverMsgID;
+    }
+    if (clientMsgID != null) {
+      _result.clientMsgID = clientMsgID;
+    }
+    if (serverTime != null) {
+      _result.serverTime = serverTime;
+    }
+    return _result;
+  }
+  factory SendMsgResp.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SendMsgResp.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SendMsgResp clone() => SendMsgResp()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SendMsgResp copyWith(void Function(SendMsgResp) updates) => super.copyWith((message) => updates(message as SendMsgResp)) as SendMsgResp; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SendMsgResp create() => SendMsgResp._();
+  SendMsgResp createEmptyInstance() => create();
+  static $pb.PbList<SendMsgResp> createRepeated() => $pb.PbList<SendMsgResp>();
+  @$core.pragma('dart2js:noInline')
+  static SendMsgResp getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendMsgResp>(create);
+  static SendMsgResp? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get errCode => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set errCode($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasErrCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearErrCode() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get errMsg => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set errMsg($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasErrMsg() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearErrMsg() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get serverMsgID => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set serverMsgID($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasServerMsgID() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearServerMsgID() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get clientMsgID => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set clientMsgID($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasClientMsgID() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearClientMsgID() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $fixnum.Int64 get serverTime => $_getI64(4);
+  @$pb.TagNumber(5)
+  set serverTime($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasServerTime() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearServerTime() => clearField(5);
 }
 

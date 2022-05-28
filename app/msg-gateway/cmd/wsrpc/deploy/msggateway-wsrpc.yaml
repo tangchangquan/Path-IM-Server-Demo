@@ -56,7 +56,7 @@ spec:
               name: zeroim-configmap
           - configMapRef:
               name: msggateway-wsrpc-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/msggateway-wsrpc:20220524105151
+        image: ccr.ccs.tencentyun.com/zeroim/msggateway-wsrpc:20220529001525
         lifecycle:
           preStop:
             exec:
