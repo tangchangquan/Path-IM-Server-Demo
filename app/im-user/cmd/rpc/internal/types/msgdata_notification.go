@@ -38,7 +38,7 @@ func NewSingleChatMsgNotification(
 		Content:     content,
 		//Seq:              0,
 		//SendTime:         0,
-		CreateTime: timeUtils.Now().UnixMilli(),
+		ClientTime: timeUtils.Now().UnixMilli(),
 		//Status:           0,
 		Options:         options,
 		OfflinePushInfo: offlinePushInfo,

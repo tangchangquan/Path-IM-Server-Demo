@@ -13,3 +13,5 @@ const USER_NOT_EXIST = 10001
 
 // auth
 const AUTH_ERROR = 20001
+const IP_RATE_LIMIT = 20002    // IP限流
+const TOKEN_RATE_LIMIT = 20003 // token限流

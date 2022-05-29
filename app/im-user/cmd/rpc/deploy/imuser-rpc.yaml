@@ -51,10 +51,14 @@ spec:
             value: imuser-rpc
           - name: ZEROIM_RPCSERVERCONF_SERVICECONF_TELEMETRY__NAME
             value: imuser-rpc
+          - name: ZEROIM_TOKENRATELIMITER__QUOTA # TokenRateLimiter
+            value: "20"
+          - name: ZEROIM_TOKENRATELIMITER__SECONDS
+            value: "1"
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/imuser-rpc:20220524095442
+        image: ccr.ccs.tencentyun.com/zeroim/imuser-rpc:20220529112650
         lifecycle:
           preStop:
             exec:

@@ -51,10 +51,14 @@ spec:
             value: imuser-api
           - name: ZEROIM_RPCSERVERCONF_SERVICECONF_TELEMETRY__NAME
             value: imuser-api
+          - name: ZEROIM_WHITERATELIMIT__QUOTA
+            value: "20"
+          - name: ZEROIM_WHITERATELIMIT__SECONDS
+            value: "10"
         envFrom:
           - configMapRef:
               name: zeroim-configmap
-        image: ccr.ccs.tencentyun.com/zeroim/imuser-api:20220524175654
+        image: ccr.ccs.tencentyun.com/zeroim/imuser-api:20220529110015
         lifecycle:
           preStop:
             exec:

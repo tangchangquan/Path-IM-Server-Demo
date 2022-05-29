@@ -8,6 +8,7 @@ import (
 )
 
 type Config struct {
+	TokenRateLimiter RateLimitConfig
 	zrpc.RpcServerConf
 	RedisConfig            RedisConfig
 	MysqlConfig            global.MysqlConfig
@@ -21,4 +22,9 @@ type Config struct {
 type RedisConfig struct {
 	redis.RedisConf
 	DB int
+}
+
+type RateLimitConfig struct {
+	Seconds int
+	Quota   int
 }

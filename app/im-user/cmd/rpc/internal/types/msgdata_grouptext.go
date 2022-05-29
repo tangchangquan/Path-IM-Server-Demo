@@ -31,7 +31,7 @@ func NewGroupTextMsg(
 		Content:     buf,
 		//Seq:             0,
 		//SendTime:        0,
-		CreateTime: timeUtils.Now().UnixMilli(),
+		ClientTime: timeUtils.Now().UnixMilli(),
 		//Status:          0,
 		//Options:         nil,
 		//OfflinePushInfo: nil,

@@ -6,6 +6,8 @@ import (
 	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/internal/svc"
 	"github.com/Path-IM/Path-IM-Server-Demo/app/im-user/cmd/rpc/pb"
 	jwtUtils "github.com/Path-IM/Path-IM-Server-Demo/common/utils/jwt"
+	"github.com/Path-IM/Path-IM-Server-Demo/common/xerr"
+	"github.com/zeromicro/go-zero/core/limit"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -29,6 +31,26 @@ func NewVerifyTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Verif
 
 // 检查token
 func (l *VerifyTokenLogic) VerifyToken(in *pb.VerifyTokenReq) (*pb.VerifyTokenResp, error) {
+	// 检查限流
+	{
+		takeRes, err := l.rep.RateLimiter.Take(in.Token)
+		if err != nil {
+			l.Errorf("check rate limiter error: %v", err)
+		} else {
+			switch takeRes {
+			case limit.OverQuota:
+				l.Errorf("token:%s id:%s, rate limit OverQuota", in.Token, in.SendID)
+				return &pb.VerifyTokenResp{
+					ErrMsg: "rate limit OverQuota",
+				}, xerr.New(xerr.TOKEN_RATE_LIMIT, "您的操作过于频繁，请稍后再试")
+			case limit.HitQuota:
+				l.Errorf("token:%s id:%s, rate limit HitQuota", in.Token, in.SendID)
+				return &pb.VerifyTokenResp{
+					ErrMsg: "rate limit HitQuota",
+				}, xerr.New(xerr.TOKEN_RATE_LIMIT, "您的操作过于频繁，请稍后再试")
+			}
+		}
+	}
 	return &pb.VerifyTokenResp{
 		Uid:     in.SendID,
 		Success: true,
