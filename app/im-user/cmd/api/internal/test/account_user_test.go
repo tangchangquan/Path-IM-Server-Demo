@@ -19,7 +19,7 @@ func TestRegister(t *testing.T) {
 func TestRegisters(t *testing.T) {
 	for i := 0; i < 1000; i++ {
 		post("/v1/white/account/register", &types.RegisterReq{
-			Username: fmt.Sprintf("trs-0-%d", i),
+			Username: fmt.Sprintf("trs-1-%d", i),
 			Password: "123456",
 		}, nil)
 	}

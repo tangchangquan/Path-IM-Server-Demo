@@ -14,3 +14,9 @@
 - [x] 完成 消息持久化存储 文档 编写 [第十天](docs/persistent.md)
 - [x] 支持 cassandra 离线消息存储 [第十二天](docs/cassandra.md)
 - [x] go-zero periodlimit 用户发送消息限流 [第十二天](docs/periodlimit.md)
+
+# rancher 查看服务运行情况
+- 由于服务器配置太低 已经没有资源开启监控组件了
+- 地址：[rancher](https://42.194.149.177:1443)
+- 用户名：guest
+- 密码：guest
