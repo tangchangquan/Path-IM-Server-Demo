@@ -13,7 +13,7 @@ func (l *MsgTransferPersistentOnlineLogic) saveSuperGroupChat(ctx context.Contex
 		l.Error("saveGroupChat error, c is nil or c.MsgData is nil")
 		return nil
 	}
-	chat := &model.GroupChat{
+	chat := &model.MysqlGroupChat{
 		ServerMsgID:      c.MsgData.ServerMsgID,
 		SendID:           c.MsgData.SendID,
 		RecvID:           c.MsgData.RecvID,
@@ -27,8 +27,8 @@ func (l *MsgTransferPersistentOnlineLogic) saveSuperGroupChat(ctx context.Contex
 		ContentType:      c.MsgData.ContentType,
 		Content:          string(c.MsgData.Content),
 		Seq:              c.MsgData.Seq,
-		SendTime:         c.MsgData.SendTime,
-		CreateTime:       c.MsgData.CreateTime,
+		SendTime:         c.MsgData.ServerTime,
+		CreateTime:       c.MsgData.ClientTime,
 		OfflinePushInfo:  model.NewOfflinePushInfo(c.MsgData.OfflinePushInfo),
 		AtUserIDList:     c.MsgData.AtUserIDList,
 		Options:          c.MsgData.Options,

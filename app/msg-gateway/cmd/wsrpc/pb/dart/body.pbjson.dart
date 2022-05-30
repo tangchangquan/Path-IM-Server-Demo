@@ -1,6 +1,6 @@
 ///
 //  Generated code. Do not modify.
-//  source: param.proto
+//  source: body.proto
 //
 // @dart = 2.12
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields,deprecated_member_use_from_same_package
@@ -8,9 +8,9 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
-@$core.Deprecated('Use reqDescriptor instead')
-const Req$json = const {
-  '1': 'Req',
+@$core.Deprecated('Use bodyReqDescriptor instead')
+const BodyReq$json = const {
+  '1': 'BodyReq',
   '2': const [
     const {'1': 'ReqIdentifier', '3': 1, '4': 1, '5': 13, '10': 'ReqIdentifier'},
     const {'1': 'Token', '3': 2, '4': 1, '5': 9, '10': 'Token'},
@@ -20,11 +20,11 @@ const Req$json = const {
   ],
 };
 
-/// Descriptor for `Req`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List reqDescriptor = $convert.base64Decode('CgNSZXESJAoNUmVxSWRlbnRpZmllchgBIAEoDVINUmVxSWRlbnRpZmllchIUCgVUb2tlbhgCIAEoCVIFVG9rZW4SFgoGU2VuZElEGAMgASgJUgZTZW5kSUQSGAoHTXNnSW5jchgEIAEoCVIHTXNnSW5jchISCgREYXRhGAUgASgMUgREYXRh');
-@$core.Deprecated('Use respDescriptor instead')
-const Resp$json = const {
-  '1': 'Resp',
+/// Descriptor for `BodyReq`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List bodyReqDescriptor = $convert.base64Decode('CgdCb2R5UmVxEiQKDVJlcUlkZW50aWZpZXIYASABKA1SDVJlcUlkZW50aWZpZXISFAoFVG9rZW4YAiABKAlSBVRva2VuEhYKBlNlbmRJRBgDIAEoCVIGU2VuZElEEhgKB01zZ0luY3IYBCABKAlSB01zZ0luY3ISEgoERGF0YRgFIAEoDFIERGF0YQ==');
+@$core.Deprecated('Use bodyRespDescriptor instead')
+const BodyResp$json = const {
+  '1': 'BodyResp',
   '2': const [
     const {'1': 'ReqIdentifier', '3': 1, '4': 1, '5': 13, '10': 'ReqIdentifier'},
     const {'1': 'MsgIncr', '3': 2, '4': 1, '5': 9, '10': 'MsgIncr'},
@@ -34,5 +34,5 @@ const Resp$json = const {
   ],
 };
 
-/// Descriptor for `Resp`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List respDescriptor = $convert.base64Decode('CgRSZXNwEiQKDVJlcUlkZW50aWZpZXIYASABKA1SDVJlcUlkZW50aWZpZXISGAoHTXNnSW5jchgCIAEoCVIHTXNnSW5jchIYCgdFcnJDb2RlGAMgASgNUgdFcnJDb2RlEhYKBkVyck1zZxgEIAEoCVIGRXJyTXNnEhIKBERhdGEYBSABKAxSBERhdGE=');
+/// Descriptor for `BodyResp`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List bodyRespDescriptor = $convert.base64Decode('CghCb2R5UmVzcBIkCg1SZXFJZGVudGlmaWVyGAEgASgNUg1SZXFJZGVudGlmaWVyEhgKB01zZ0luY3IYAiABKAlSB01zZ0luY3ISGAoHRXJyQ29kZRgDIAEoDVIHRXJyQ29kZRIWCgZFcnJNc2cYBCABKAlSBkVyck1zZxISCgREYXRhGAUgASgMUgREYXRh');

@@ -2,16 +2,21 @@ syntax = "proto3";
 
 package pb;
 
+message SendMsgReq {
+  string token = 1;
+  MsgData msgData = 2;
+}
+
 message MsgData {
-  string  sendID = 1;
-  string  recvID = 2;
+  string sendID = 1;
+  string recvID = 2;
   string groupID = 3;
   string clientMsgID = 4;
   string serverMsgID = 5;
   int32 senderPlatformID = 6;
-  string  senderNickname = 7;
-  string  senderFaceURL = 8;
-  int32   sessionType = 9;
+  string senderNickname = 7;
+  string senderFaceURL = 8;
+  int32 sessionType = 9;
   int32 msgFrom = 10;
   int32 contentType = 11;
   bytes content = 12;
@@ -31,33 +36,10 @@ message OfflinePushInfo{
   bool iOSBadgeCount = 5;
 }
 
-
-message PullMessageBySeqListReq{
-  string userID = 1;
-  repeated uint32 seqList = 2;
-}
-
-message PullMessageBySuperGroupSeqListReq {
-  string groupID = 1;
-  repeated uint32 seqList = 2;
-}
-
-message PullMessageBySeqListResp {
-  int32 errCode = 1;
-  string errMsg = 2;
-  repeated MsgData list = 3;
-}
-
-message SendMsgReq {
-  string token = 1;
-  string operationID = 2;
-  MsgData msgData = 3;
-}
-
 message SendMsgResp {
   int32 errCode = 1;
   string errMsg = 2;
   string serverMsgID = 3;
   string clientMsgID = 4;
-  int64  serverTime = 5;
+  int64 serverTime = 5;
 }

@@ -8,6 +8,17 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+@$core.Deprecated('Use sendMsgReqDescriptor instead')
+const SendMsgReq$json = const {
+  '1': 'SendMsgReq',
+  '2': const [
+    const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
+    const {'1': 'msgData', '3': 2, '4': 1, '5': 11, '6': '.pb.MsgData', '10': 'msgData'},
+  ],
+};
+
+/// Descriptor for `SendMsgReq`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendMsgReqDescriptor = $convert.base64Decode('CgpTZW5kTXNnUmVxEhQKBXRva2VuGAEgASgJUgV0b2tlbhIlCgdtc2dEYXRhGAIgASgLMgsucGIuTXNnRGF0YVIHbXNnRGF0YQ==');
 @$core.Deprecated('Use msgDataDescriptor instead')
 const MsgData$json = const {
   '1': 'MsgData',
@@ -60,52 +71,6 @@ const OfflinePushInfo$json = const {
 
 /// Descriptor for `OfflinePushInfo`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List offlinePushInfoDescriptor = $convert.base64Decode('Cg9PZmZsaW5lUHVzaEluZm8SFAoFdGl0bGUYASABKAlSBXRpdGxlEhIKBGRlc2MYAiABKAlSBGRlc2MSDgoCZXgYAyABKAlSAmV4EiIKDGlPU1B1c2hTb3VuZBgEIAEoCVIMaU9TUHVzaFNvdW5kEiQKDWlPU0JhZGdlQ291bnQYBSABKAhSDWlPU0JhZGdlQ291bnQ=');
-@$core.Deprecated('Use pullMessageBySeqListReqDescriptor instead')
-const PullMessageBySeqListReq$json = const {
-  '1': 'PullMessageBySeqListReq',
-  '2': const [
-    const {'1': 'userID', '3': 1, '4': 1, '5': 9, '10': 'userID'},
-    const {'1': 'seqList', '3': 2, '4': 3, '5': 13, '10': 'seqList'},
-  ],
-};
-
-/// Descriptor for `PullMessageBySeqListReq`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pullMessageBySeqListReqDescriptor = $convert.base64Decode('ChdQdWxsTWVzc2FnZUJ5U2VxTGlzdFJlcRIWCgZ1c2VySUQYASABKAlSBnVzZXJJRBIYCgdzZXFMaXN0GAIgAygNUgdzZXFMaXN0');
-@$core.Deprecated('Use pullMessageBySuperGroupSeqListReqDescriptor instead')
-const PullMessageBySuperGroupSeqListReq$json = const {
-  '1': 'PullMessageBySuperGroupSeqListReq',
-  '2': const [
-    const {'1': 'groupID', '3': 1, '4': 1, '5': 9, '10': 'groupID'},
-    const {'1': 'seqList', '3': 2, '4': 3, '5': 13, '10': 'seqList'},
-  ],
-};
-
-/// Descriptor for `PullMessageBySuperGroupSeqListReq`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pullMessageBySuperGroupSeqListReqDescriptor = $convert.base64Decode('CiFQdWxsTWVzc2FnZUJ5U3VwZXJHcm91cFNlcUxpc3RSZXESGAoHZ3JvdXBJRBgBIAEoCVIHZ3JvdXBJRBIYCgdzZXFMaXN0GAIgAygNUgdzZXFMaXN0');
-@$core.Deprecated('Use pullMessageBySeqListRespDescriptor instead')
-const PullMessageBySeqListResp$json = const {
-  '1': 'PullMessageBySeqListResp',
-  '2': const [
-    const {'1': 'errCode', '3': 1, '4': 1, '5': 5, '10': 'errCode'},
-    const {'1': 'errMsg', '3': 2, '4': 1, '5': 9, '10': 'errMsg'},
-    const {'1': 'list', '3': 3, '4': 3, '5': 11, '6': '.pb.MsgData', '10': 'list'},
-  ],
-};
-
-/// Descriptor for `PullMessageBySeqListResp`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pullMessageBySeqListRespDescriptor = $convert.base64Decode('ChhQdWxsTWVzc2FnZUJ5U2VxTGlzdFJlc3ASGAoHZXJyQ29kZRgBIAEoBVIHZXJyQ29kZRIWCgZlcnJNc2cYAiABKAlSBmVyck1zZxIfCgRsaXN0GAMgAygLMgsucGIuTXNnRGF0YVIEbGlzdA==');
-@$core.Deprecated('Use sendMsgReqDescriptor instead')
-const SendMsgReq$json = const {
-  '1': 'SendMsgReq',
-  '2': const [
-    const {'1': 'token', '3': 1, '4': 1, '5': 9, '10': 'token'},
-    const {'1': 'operationID', '3': 2, '4': 1, '5': 9, '10': 'operationID'},
-    const {'1': 'msgData', '3': 3, '4': 1, '5': 11, '6': '.pb.MsgData', '10': 'msgData'},
-  ],
-};
-
-/// Descriptor for `SendMsgReq`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List sendMsgReqDescriptor = $convert.base64Decode('CgpTZW5kTXNnUmVxEhQKBXRva2VuGAEgASgJUgV0b2tlbhIgCgtvcGVyYXRpb25JRBgCIAEoCVILb3BlcmF0aW9uSUQSJQoHbXNnRGF0YRgDIAEoCzILLnBiLk1zZ0RhdGFSB21zZ0RhdGE=');
 @$core.Deprecated('Use sendMsgRespDescriptor instead')
 const SendMsgResp$json = const {
   '1': 'SendMsgResp',

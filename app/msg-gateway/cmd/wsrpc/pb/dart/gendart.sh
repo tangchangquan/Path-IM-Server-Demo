@@ -3,5 +3,5 @@
 #flutter pub global activate protoc_plugin
 #protoc param.proto --dart_out=./dart
 rm -rf ./*.dart
-protoc *.proto --dart_out=.
+protoc -I . *.proto --dart_out=.
 tar -zcvf ~/Desktop/dart.pb.tar.gz ./*

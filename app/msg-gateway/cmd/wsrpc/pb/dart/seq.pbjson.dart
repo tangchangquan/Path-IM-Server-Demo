@@ -31,37 +31,37 @@ const GetMaxAndMinSeqResp$json = const {
 
 /// Descriptor for `GetMaxAndMinSeqResp`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getMaxAndMinSeqRespDescriptor = $convert.base64Decode('ChNHZXRNYXhBbmRNaW5TZXFSZXNwEhgKB0VyckNvZGUYASABKAVSB0VyckNvZGUSFgoGRXJyTXNnGAIgASgJUgZFcnJNc2cSFgoGTWF4U2VxGAMgASgNUgZNYXhTZXESFgoGTWluU2VxGAQgASgNUgZNaW5TZXE=');
-@$core.Deprecated('Use getMaxAndMinSuperGroupSeqReqDescriptor instead')
-const GetMaxAndMinSuperGroupSeqReq$json = const {
-  '1': 'GetMaxAndMinSuperGroupSeqReq',
+@$core.Deprecated('Use getMaxAndMinGroupSeqReqDescriptor instead')
+const GetMaxAndMinGroupSeqReq$json = const {
+  '1': 'GetMaxAndMinGroupSeqReq',
   '2': const [
-    const {'1': 'SuperGroupIDList', '3': 1, '4': 3, '5': 9, '10': 'SuperGroupIDList'},
+    const {'1': 'GroupIDList', '3': 1, '4': 3, '5': 9, '10': 'GroupIDList'},
   ],
 };
 
-/// Descriptor for `GetMaxAndMinSuperGroupSeqReq`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMaxAndMinSuperGroupSeqReqDescriptor = $convert.base64Decode('ChxHZXRNYXhBbmRNaW5TdXBlckdyb3VwU2VxUmVxEioKEFN1cGVyR3JvdXBJRExpc3QYASADKAlSEFN1cGVyR3JvdXBJRExpc3Q=');
-@$core.Deprecated('Use getMaxAndMinSuperGroupSeqRespItemDescriptor instead')
-const GetMaxAndMinSuperGroupSeqRespItem$json = const {
-  '1': 'GetMaxAndMinSuperGroupSeqRespItem',
-  '2': const [
-    const {'1': 'SuperGroupID', '3': 1, '4': 1, '5': 9, '10': 'SuperGroupID'},
-    const {'1': 'MaxSeq', '3': 3, '4': 1, '5': 13, '10': 'MaxSeq'},
-    const {'1': 'MinSeq', '3': 4, '4': 1, '5': 13, '10': 'MinSeq'},
-  ],
-};
-
-/// Descriptor for `GetMaxAndMinSuperGroupSeqRespItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMaxAndMinSuperGroupSeqRespItemDescriptor = $convert.base64Decode('CiFHZXRNYXhBbmRNaW5TdXBlckdyb3VwU2VxUmVzcEl0ZW0SIgoMU3VwZXJHcm91cElEGAEgASgJUgxTdXBlckdyb3VwSUQSFgoGTWF4U2VxGAMgASgNUgZNYXhTZXESFgoGTWluU2VxGAQgASgNUgZNaW5TZXE=');
-@$core.Deprecated('Use getMaxAndMinSuperGroupSeqRespDescriptor instead')
-const GetMaxAndMinSuperGroupSeqResp$json = const {
-  '1': 'GetMaxAndMinSuperGroupSeqResp',
+/// Descriptor for `GetMaxAndMinGroupSeqReq`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMaxAndMinGroupSeqReqDescriptor = $convert.base64Decode('ChdHZXRNYXhBbmRNaW5Hcm91cFNlcVJlcRIgCgtHcm91cElETGlzdBgBIAMoCVILR3JvdXBJRExpc3Q=');
+@$core.Deprecated('Use getMaxAndMinGroupSeqRespDescriptor instead')
+const GetMaxAndMinGroupSeqResp$json = const {
+  '1': 'GetMaxAndMinGroupSeqResp',
   '2': const [
     const {'1': 'ErrCode', '3': 1, '4': 1, '5': 5, '10': 'ErrCode'},
     const {'1': 'ErrMsg', '3': 2, '4': 1, '5': 9, '10': 'ErrMsg'},
-    const {'1': 'SuperGroupSeqList', '3': 3, '4': 3, '5': 11, '6': '.pb.GetMaxAndMinSuperGroupSeqRespItem', '10': 'SuperGroupSeqList'},
+    const {'1': 'GroupSeqList', '3': 3, '4': 3, '5': 11, '6': '.pb.GetMaxAndMinGroupSeqRespItem', '10': 'GroupSeqList'},
   ],
 };
 
-/// Descriptor for `GetMaxAndMinSuperGroupSeqResp`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMaxAndMinSuperGroupSeqRespDescriptor = $convert.base64Decode('Ch1HZXRNYXhBbmRNaW5TdXBlckdyb3VwU2VxUmVzcBIYCgdFcnJDb2RlGAEgASgFUgdFcnJDb2RlEhYKBkVyck1zZxgCIAEoCVIGRXJyTXNnElMKEVN1cGVyR3JvdXBTZXFMaXN0GAMgAygLMiUucGIuR2V0TWF4QW5kTWluU3VwZXJHcm91cFNlcVJlc3BJdGVtUhFTdXBlckdyb3VwU2VxTGlzdA==');
+/// Descriptor for `GetMaxAndMinGroupSeqResp`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMaxAndMinGroupSeqRespDescriptor = $convert.base64Decode('ChhHZXRNYXhBbmRNaW5Hcm91cFNlcVJlc3ASGAoHRXJyQ29kZRgBIAEoBVIHRXJyQ29kZRIWCgZFcnJNc2cYAiABKAlSBkVyck1zZxJECgxHcm91cFNlcUxpc3QYAyADKAsyIC5wYi5HZXRNYXhBbmRNaW5Hcm91cFNlcVJlc3BJdGVtUgxHcm91cFNlcUxpc3Q=');
+@$core.Deprecated('Use getMaxAndMinGroupSeqRespItemDescriptor instead')
+const GetMaxAndMinGroupSeqRespItem$json = const {
+  '1': 'GetMaxAndMinGroupSeqRespItem',
+  '2': const [
+    const {'1': 'GroupID', '3': 1, '4': 1, '5': 9, '10': 'GroupID'},
+    const {'1': 'MaxSeq', '3': 2, '4': 1, '5': 13, '10': 'MaxSeq'},
+    const {'1': 'MinSeq', '3': 3, '4': 1, '5': 13, '10': 'MinSeq'},
+  ],
+};
+
+/// Descriptor for `GetMaxAndMinGroupSeqRespItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMaxAndMinGroupSeqRespItemDescriptor = $convert.base64Decode('ChxHZXRNYXhBbmRNaW5Hcm91cFNlcVJlc3BJdGVtEhgKB0dyb3VwSUQYASABKAlSB0dyb3VwSUQSFgoGTWF4U2VxGAIgASgNUgZNYXhTZXESFgoGTWluU2VxGAMgASgNUgZNaW5TZXE=');

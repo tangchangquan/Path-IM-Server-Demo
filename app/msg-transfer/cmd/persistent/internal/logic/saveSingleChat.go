@@ -17,7 +17,7 @@ func (l *MsgTransferPersistentOnlineLogic) saveSingleChat(ctx context.Context, k
 		// 自己给自己发消息 不存储
 		return nil
 	}
-	chat := &model.CassSingleChat{
+	chat := &model.MysqlSingleChat{
 		ServerMsgID:      c.MsgData.ServerMsgID,
 		SendID:           c.MsgData.SendID,
 		RecvID:           c.MsgData.RecvID,
@@ -31,8 +31,8 @@ func (l *MsgTransferPersistentOnlineLogic) saveSingleChat(ctx context.Context, k
 		ContentType:      c.MsgData.ContentType,
 		Content:          string(c.MsgData.Content),
 		Seq:              c.MsgData.Seq,
-		SendTime:         c.MsgData.SendTime,
-		CreateTime:       c.MsgData.CreateTime,
+		SendTime:         c.MsgData.ServerTime,
+		CreateTime:       c.MsgData.ClientTime,
 		OfflinePushInfo:  model.NewOfflinePushInfo(c.MsgData.OfflinePushInfo),
 		AtUserIDList:     c.MsgData.AtUserIDList,
 		Options:          c.MsgData.Options,
