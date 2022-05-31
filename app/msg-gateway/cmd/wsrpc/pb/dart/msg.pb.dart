@@ -87,12 +87,12 @@ class MsgData extends $pb.GeneratedMessage {
     ..a<$core.int>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'msgFrom', $pb.PbFieldType.O3, protoName: 'msgFrom')
     ..a<$core.int>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'contentType', $pb.PbFieldType.O3, protoName: 'contentType')
     ..a<$core.List<$core.int>>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'content', $pb.PbFieldType.OY)
-    ..a<$core.int>(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'seq', $pb.PbFieldType.OU3)
-    ..aInt64(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverTime', protoName: 'serverTime')
-    ..aInt64(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'clientTime', protoName: 'clientTime')
-    ..aOM<OfflinePushInfo>(17, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offlinePushInfo', protoName: 'offlinePushInfo', subBuilder: OfflinePushInfo.create)
-    ..pPS(18, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'atUserIDList', protoName: 'atUserIDList')
-    ..m<$core.String, $core.bool>(19, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'options', entryClassName: 'MsgData.OptionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OB, packageName: const $pb.PackageName('pb'))
+    ..a<$core.int>(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'seq', $pb.PbFieldType.OU3)
+    ..aInt64(14, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverTime', protoName: 'serverTime')
+    ..aInt64(15, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'clientTime', protoName: 'clientTime')
+    ..aOM<OfflinePushInfo>(16, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'offlinePushInfo', protoName: 'offlinePushInfo', subBuilder: OfflinePushInfo.create)
+    ..pPS(17, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'atUserIDList', protoName: 'atUserIDList')
+    ..m<$core.String, $core.bool>(18, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'options', entryClassName: 'MsgData.OptionsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OB, packageName: const $pb.PackageName('pb'))
     ..hasRequiredFields = false
   ;
 
@@ -303,48 +303,48 @@ class MsgData extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   void clearContent() => clearField(12);
 
-  @$pb.TagNumber(14)
+  @$pb.TagNumber(13)
   $core.int get seq => $_getIZ(12);
-  @$pb.TagNumber(14)
+  @$pb.TagNumber(13)
   set seq($core.int v) { $_setUnsignedInt32(12, v); }
-  @$pb.TagNumber(14)
+  @$pb.TagNumber(13)
   $core.bool hasSeq() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearSeq() => clearField(13);
+
   @$pb.TagNumber(14)
-  void clearSeq() => clearField(14);
-
-  @$pb.TagNumber(15)
   $fixnum.Int64 get serverTime => $_getI64(13);
-  @$pb.TagNumber(15)
+  @$pb.TagNumber(14)
   set serverTime($fixnum.Int64 v) { $_setInt64(13, v); }
-  @$pb.TagNumber(15)
+  @$pb.TagNumber(14)
   $core.bool hasServerTime() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearServerTime() => clearField(14);
+
   @$pb.TagNumber(15)
-  void clearServerTime() => clearField(15);
-
-  @$pb.TagNumber(16)
   $fixnum.Int64 get clientTime => $_getI64(14);
-  @$pb.TagNumber(16)
+  @$pb.TagNumber(15)
   set clientTime($fixnum.Int64 v) { $_setInt64(14, v); }
-  @$pb.TagNumber(16)
+  @$pb.TagNumber(15)
   $core.bool hasClientTime() => $_has(14);
-  @$pb.TagNumber(16)
-  void clearClientTime() => clearField(16);
+  @$pb.TagNumber(15)
+  void clearClientTime() => clearField(15);
 
-  @$pb.TagNumber(17)
+  @$pb.TagNumber(16)
   OfflinePushInfo get offlinePushInfo => $_getN(15);
-  @$pb.TagNumber(17)
-  set offlinePushInfo(OfflinePushInfo v) { setField(17, v); }
-  @$pb.TagNumber(17)
+  @$pb.TagNumber(16)
+  set offlinePushInfo(OfflinePushInfo v) { setField(16, v); }
+  @$pb.TagNumber(16)
   $core.bool hasOfflinePushInfo() => $_has(15);
-  @$pb.TagNumber(17)
-  void clearOfflinePushInfo() => clearField(17);
-  @$pb.TagNumber(17)
+  @$pb.TagNumber(16)
+  void clearOfflinePushInfo() => clearField(16);
+  @$pb.TagNumber(16)
   OfflinePushInfo ensureOfflinePushInfo() => $_ensure(15);
 
-  @$pb.TagNumber(18)
+  @$pb.TagNumber(17)
   $core.List<$core.String> get atUserIDList => $_getList(16);
 
-  @$pb.TagNumber(19)
+  @$pb.TagNumber(18)
   $core.Map<$core.String, $core.bool> get options => $_getMap(17);
 }
 
@@ -453,29 +453,19 @@ class OfflinePushInfo extends $pb.GeneratedMessage {
 
 class SendMsgResp extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SendMsgResp', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errCode', $pb.PbFieldType.O3, protoName: 'errCode')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errMsg', protoName: 'errMsg')
-    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverMsgID', protoName: 'serverMsgID')
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'clientMsgID', protoName: 'clientMsgID')
-    ..aInt64(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverTime', protoName: 'serverTime')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverMsgID', protoName: 'serverMsgID')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'clientMsgID', protoName: 'clientMsgID')
+    ..aInt64(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'serverTime', protoName: 'serverTime')
     ..hasRequiredFields = false
   ;
 
   SendMsgResp._() : super();
   factory SendMsgResp({
-    $core.int? errCode,
-    $core.String? errMsg,
     $core.String? serverMsgID,
     $core.String? clientMsgID,
     $fixnum.Int64? serverTime,
   }) {
     final _result = create();
-    if (errCode != null) {
-      _result.errCode = errCode;
-    }
-    if (errMsg != null) {
-      _result.errMsg = errMsg;
-    }
     if (serverMsgID != null) {
       _result.serverMsgID = serverMsgID;
     }
@@ -509,48 +499,30 @@ class SendMsgResp extends $pb.GeneratedMessage {
   static SendMsgResp? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get errCode => $_getIZ(0);
+  $core.String get serverMsgID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set errCode($core.int v) { $_setSignedInt32(0, v); }
+  set serverMsgID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasErrCode() => $_has(0);
+  $core.bool hasServerMsgID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearErrCode() => clearField(1);
+  void clearServerMsgID() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get errMsg => $_getSZ(1);
+  $core.String get clientMsgID => $_getSZ(1);
   @$pb.TagNumber(2)
-  set errMsg($core.String v) { $_setString(1, v); }
+  set clientMsgID($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasErrMsg() => $_has(1);
+  $core.bool hasClientMsgID() => $_has(1);
   @$pb.TagNumber(2)
-  void clearErrMsg() => clearField(2);
+  void clearClientMsgID() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get serverMsgID => $_getSZ(2);
+  $fixnum.Int64 get serverTime => $_getI64(2);
   @$pb.TagNumber(3)
-  set serverMsgID($core.String v) { $_setString(2, v); }
+  set serverTime($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasServerMsgID() => $_has(2);
+  $core.bool hasServerTime() => $_has(2);
   @$pb.TagNumber(3)
-  void clearServerMsgID() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.String get clientMsgID => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set clientMsgID($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasClientMsgID() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearClientMsgID() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get serverTime => $_getI64(4);
-  @$pb.TagNumber(5)
-  set serverTime($fixnum.Int64 v) { $_setInt64(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasServerTime() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearServerTime() => clearField(5);
+  void clearServerTime() => clearField(3);
 }
 

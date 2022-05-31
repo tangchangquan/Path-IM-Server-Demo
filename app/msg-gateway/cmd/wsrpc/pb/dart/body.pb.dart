@@ -11,11 +11,10 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class BodyReq extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'BodyReq', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ReqIdentifier', $pb.PbFieldType.OU3, protoName: 'ReqIdentifier')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Token', protoName: 'Token')
-    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'SendID', protoName: 'SendID')
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'MsgIncr', protoName: 'MsgIncr')
-    ..a<$core.List<$core.int>>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Data', $pb.PbFieldType.OY, protoName: 'Data')
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reqIdentifier', $pb.PbFieldType.OU3, protoName: 'reqIdentifier')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sendID', protoName: 'sendID')
+    ..a<$core.List<$core.int>>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'data', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -24,7 +23,6 @@ class BodyReq extends $pb.GeneratedMessage {
     $core.int? reqIdentifier,
     $core.String? token,
     $core.String? sendID,
-    $core.String? msgIncr,
     $core.List<$core.int>? data,
   }) {
     final _result = create();
@@ -36,9 +34,6 @@ class BodyReq extends $pb.GeneratedMessage {
     }
     if (sendID != null) {
       _result.sendID = sendID;
-    }
-    if (msgIncr != null) {
-      _result.msgIncr = msgIncr;
     }
     if (data != null) {
       _result.data = data;
@@ -94,38 +89,27 @@ class BodyReq extends $pb.GeneratedMessage {
   void clearSendID() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get msgIncr => $_getSZ(3);
+  $core.List<$core.int> get data => $_getN(3);
   @$pb.TagNumber(4)
-  set msgIncr($core.String v) { $_setString(3, v); }
+  set data($core.List<$core.int> v) { $_setBytes(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasMsgIncr() => $_has(3);
+  $core.bool hasData() => $_has(3);
   @$pb.TagNumber(4)
-  void clearMsgIncr() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $core.List<$core.int> get data => $_getN(4);
-  @$pb.TagNumber(5)
-  set data($core.List<$core.int> v) { $_setBytes(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasData() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearData() => clearField(5);
+  void clearData() => clearField(4);
 }
 
 class BodyResp extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'BodyResp', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ReqIdentifier', $pb.PbFieldType.OU3, protoName: 'ReqIdentifier')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'MsgIncr', protoName: 'MsgIncr')
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ErrCode', $pb.PbFieldType.OU3, protoName: 'ErrCode')
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ErrMsg', protoName: 'ErrMsg')
-    ..a<$core.List<$core.int>>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'Data', $pb.PbFieldType.OY, protoName: 'Data')
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reqIdentifier', $pb.PbFieldType.OU3, protoName: 'reqIdentifier')
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errCode', $pb.PbFieldType.OU3, protoName: 'errCode')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errMsg', protoName: 'errMsg')
+    ..a<$core.List<$core.int>>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'data', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
   BodyResp._() : super();
   factory BodyResp({
     $core.int? reqIdentifier,
-    $core.String? msgIncr,
     $core.int? errCode,
     $core.String? errMsg,
     $core.List<$core.int>? data,
@@ -133,9 +117,6 @@ class BodyResp extends $pb.GeneratedMessage {
     final _result = create();
     if (reqIdentifier != null) {
       _result.reqIdentifier = reqIdentifier;
-    }
-    if (msgIncr != null) {
-      _result.msgIncr = msgIncr;
     }
     if (errCode != null) {
       _result.errCode = errCode;
@@ -179,39 +160,30 @@ class BodyResp extends $pb.GeneratedMessage {
   void clearReqIdentifier() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get msgIncr => $_getSZ(1);
+  $core.int get errCode => $_getIZ(1);
   @$pb.TagNumber(2)
-  set msgIncr($core.String v) { $_setString(1, v); }
+  set errCode($core.int v) { $_setUnsignedInt32(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMsgIncr() => $_has(1);
+  $core.bool hasErrCode() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMsgIncr() => clearField(2);
+  void clearErrCode() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get errCode => $_getIZ(2);
+  $core.String get errMsg => $_getSZ(2);
   @$pb.TagNumber(3)
-  set errCode($core.int v) { $_setUnsignedInt32(2, v); }
+  set errMsg($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasErrCode() => $_has(2);
+  $core.bool hasErrMsg() => $_has(2);
   @$pb.TagNumber(3)
-  void clearErrCode() => clearField(3);
+  void clearErrMsg() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get errMsg => $_getSZ(3);
+  $core.List<$core.int> get data => $_getN(3);
   @$pb.TagNumber(4)
-  set errMsg($core.String v) { $_setString(3, v); }
+  set data($core.List<$core.int> v) { $_setBytes(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasErrMsg() => $_has(3);
+  $core.bool hasData() => $_has(3);
   @$pb.TagNumber(4)
-  void clearErrMsg() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $core.List<$core.int> get data => $_getN(4);
-  @$pb.TagNumber(5)
-  set data($core.List<$core.int> v) { $_setBytes(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasData() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearData() => clearField(5);
+  void clearData() => clearField(4);
 }
 

@@ -15,7 +15,5 @@ message PullMessageByGroupSeqListReq {
 }
 
 message PullMessageBySeqListResp {
-  int32 errCode = 1;
-  string errMsg = 2;
-  repeated MsgData list = 3;
+  repeated MsgData list = 1;
 }

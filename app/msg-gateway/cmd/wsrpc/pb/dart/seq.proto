@@ -3,28 +3,24 @@ syntax = "proto3";
 package pb;
 
 message GetMaxAndMinSeqReq {
-  string UserID = 1;
 }
 
 message GetMaxAndMinSeqResp {
-  int32 ErrCode = 1;
-  string ErrMsg = 2;
-  uint32 MaxSeq = 3;
-  uint32 MinSeq = 4;
+  uint32 maxSeq = 1;
+  uint32 minSeq = 2;
 }
 
+
 message GetMaxAndMinGroupSeqReq {
-  repeated string GroupIDList = 1;
+  repeated string groupIDList = 1;
 }
 
 message GetMaxAndMinGroupSeqResp {
-  int32 ErrCode = 1;
-  string ErrMsg = 2;
-  repeated GetMaxAndMinGroupSeqRespItem GroupSeqList = 3;
+  repeated GetMaxAndMinGroupSeqRespItem groupSeqList = 1;
 }
 
 message GetMaxAndMinGroupSeqRespItem {
-  string GroupID = 1;
-  uint32 MaxSeq = 2;
-  uint32 MinSeq = 3;
+  string groupID = 1;
+  uint32 maxSeq = 2;
+  uint32 minSeq = 3;
 }

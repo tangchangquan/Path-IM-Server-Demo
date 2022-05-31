@@ -34,11 +34,9 @@ final $typed_data.Uint8List pullMessageByGroupSeqListReqDescriptor = $convert.ba
 const PullMessageBySeqListResp$json = const {
   '1': 'PullMessageBySeqListResp',
   '2': const [
-    const {'1': 'errCode', '3': 1, '4': 1, '5': 5, '10': 'errCode'},
-    const {'1': 'errMsg', '3': 2, '4': 1, '5': 9, '10': 'errMsg'},
-    const {'1': 'list', '3': 3, '4': 3, '5': 11, '6': '.pb.MsgData', '10': 'list'},
+    const {'1': 'list', '3': 1, '4': 3, '5': 11, '6': '.pb.MsgData', '10': 'list'},
   ],
 };
 
 /// Descriptor for `PullMessageBySeqListResp`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List pullMessageBySeqListRespDescriptor = $convert.base64Decode('ChhQdWxsTWVzc2FnZUJ5U2VxTGlzdFJlc3ASGAoHZXJyQ29kZRgBIAEoBVIHZXJyQ29kZRIWCgZlcnJNc2cYAiABKAlSBmVyck1zZxIfCgRsaXN0GAMgAygLMgsucGIuTXNnRGF0YVIEbGlzdA==');
+final $typed_data.Uint8List pullMessageBySeqListRespDescriptor = $convert.base64Decode('ChhQdWxsTWVzc2FnZUJ5U2VxTGlzdFJlc3ASHwoEbGlzdBgBIAMoCzILLnBiLk1zZ0RhdGFSBGxpc3Q=');

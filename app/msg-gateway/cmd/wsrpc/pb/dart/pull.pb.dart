@@ -123,25 +123,15 @@ class PullMessageByGroupSeqListReq extends $pb.GeneratedMessage {
 
 class PullMessageBySeqListResp extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PullMessageBySeqListResp', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errCode', $pb.PbFieldType.O3, protoName: 'errCode')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errMsg', protoName: 'errMsg')
-    ..pc<$0.MsgData>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'list', $pb.PbFieldType.PM, subBuilder: $0.MsgData.create)
+    ..pc<$0.MsgData>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'list', $pb.PbFieldType.PM, subBuilder: $0.MsgData.create)
     ..hasRequiredFields = false
   ;
 
   PullMessageBySeqListResp._() : super();
   factory PullMessageBySeqListResp({
-    $core.int? errCode,
-    $core.String? errMsg,
     $core.Iterable<$0.MsgData>? list,
   }) {
     final _result = create();
-    if (errCode != null) {
-      _result.errCode = errCode;
-    }
-    if (errMsg != null) {
-      _result.errMsg = errMsg;
-    }
     if (list != null) {
       _result.list.addAll(list);
     }
@@ -169,24 +159,6 @@ class PullMessageBySeqListResp extends $pb.GeneratedMessage {
   static PullMessageBySeqListResp? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get errCode => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set errCode($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasErrCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearErrCode() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get errMsg => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set errMsg($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasErrMsg() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearErrMsg() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.List<$0.MsgData> get list => $_getList(2);
+  $core.List<$0.MsgData> get list => $_getList(0);
 }
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 tag=`date +%Y%m%d%H%M%S`
+echo "tag: $tag"
 rm -rf ./bin
 cd ..
 GOOS=linux GOARCH=amd64 go build -o deploy/bin
